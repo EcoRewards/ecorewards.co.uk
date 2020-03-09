@@ -14,6 +14,8 @@ exclude:
   - README.md
   - vendor/
   - CNAME
+  - Gemfile
+  - Gemfile.lock
   - .idea/
   - .git/
 permalink: /posts/:title
