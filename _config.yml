@@ -6,9 +6,7 @@ description: >-
 baseurl: ""
 url: "https://www.ecorewards.co.uk/"
 lang: "en"
-markdown: kramdown
 plugins:
-  - jekyll-feed
   - jekyll-minifier
 exclude:
   - README.md
