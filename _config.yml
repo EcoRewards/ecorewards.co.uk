@@ -1,0 +1,26 @@
+
+title: Eco Rewards
+email: linusnorton@gmail.com
+description: >-
+  Rewarding green travel choices
+baseurl: ""
+url: "https://www.ecorewards.co.uk/"
+lang: "en"
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-autoprefixer
+  - jekyll-minifier
+exclude:
+  - README.md
+  - vendor/
+  - CNAME
+  - .idea/
+  - .git/
+permalink: /posts/:title
+excerpt_separator: <!--more-->
+autoprefixer:
+  browsers:
+    - last 2 versions
+sass:
+  style: compressed
