@@ -1,0 +1,51 @@
+// fonts
+$font-header:       Oswald, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-type:         Muli, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// colors
+$color-white:       #ffffff;
+$color-black:       #000000;
+$color-font:        #333333;
+$color-primary:     #80cddd;
+$color-secondary:   #01ffed;
+$color-tertiary:    #512b9a;
+
+// backgrounds
+$bg-color-1:        #ffffff;
+$bg-color-2:        #80cddd;
+$bg-color-3:        #343a40;
+
+// images
+$logo:              "../img/logo.svg";
+
+// viewports
+$min-default: 320px;
+$min-phone: 480px;
+$min-smalltablet: 600px;
+$min-tablet: 768px;
+$min-laptop: 992px;
+$min-desktop: 1200px;
+$min-hd: 1480px;
+$max-default: $min-phone - 1;
+$max-phone: $min-smalltablet - 1;
+$max-smalltablet: $min-tablet - 1;
+$max-tablet: $min-laptop - 1;
+$max-laptop: $min-desktop - 1;
+
+$screen-default: unquote("max-width: #{$min-default}");
+$screen-default-max: unquote("max-width: #{$max-default}");
+$screen-phone: unquote("min-width: #{$min-phone}");
+$screen-smalltablet: unquote("min-width: #{$min-smalltablet}");
+$screen-smalltablet-max: unquote("max-width: #{$max-smalltablet}");
+$screen-tablet: unquote("min-width: #{$min-tablet}");
+$screen-tablet-max: unquote("max-width: #{$max-tablet}");
+$screen-laptop: unquote("min-width: #{$min-laptop}");
+$screen-desktop: unquote("min-width: #{$min-desktop}");
+$screen-desktop-lg: unquote("min-width: #{$min-hd}");
+
+
+
+
+
+
+

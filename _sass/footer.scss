@@ -1,0 +1,15 @@
+
+footer {
+  background-color: $bg-color-3;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+  color: $color-white;
+}
+
+footer a, footer a:visited, footer a:hover, footer a:active {
+  color: $color-primary;
+}

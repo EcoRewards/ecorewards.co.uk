@@ -9,7 +9,6 @@ lang: "en"
 markdown: kramdown
 plugins:
   - jekyll-feed
-  - jekyll-autoprefixer
   - jekyll-minifier
 exclude:
   - README.md
@@ -19,8 +18,5 @@ exclude:
   - .git/
 permalink: /posts/:title
 excerpt_separator: <!--more-->
-autoprefixer:
-  browsers:
-    - last 2 versions
 sass:
   style: compressed
