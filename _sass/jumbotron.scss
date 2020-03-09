@@ -19,7 +19,7 @@
 .jumbotron p {
   color: $color-white;
   line-height: 2.1rem;
-  background-color: $bg-color-3;
+  background: url("/assets/image/bg-dark.png") repeat;
   padding: 40px 25px;
   margin-top: 30px;
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 94%);
