@@ -3,16 +3,17 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin-bottom: 0;
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.8) 100%), url("../image/jumbotron-background.jpg");
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.45) 100%), url("../image/jumbotron-background.jpg");
   background-size: cover;
+  background-position: 0 -60px;
   color: $color-black;
 }
 
 
 @media (min-width: 768px) {
   .jumbotron {
-    padding-top: 4.5rem;
-    padding-bottom: 6.5rem;
+    padding-top: 4rem;
+    padding-bottom: 0rem;
   }
 }
 
@@ -20,8 +21,7 @@
   color: $color-white;
   line-height: 2.1rem;
   background: url("../image/bg-dark.png") repeat;
-  padding: 40px 25px;
-  margin-top: 30px;
+  padding: 40px 25px 60px 25px;
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0% 94%);
 }
 
@@ -31,4 +31,32 @@
 
 .jumbotron .container {
   max-width: 50rem;
+}
+
+.modes {
+  display: none;
+  position: relative;
+  top: -80px;
+  left: 90px;
+
+  @media ($screen-tablet) {
+    display: flex;
+  }
+
+  div {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    color: transparent;
+    padding: 0;
+    margin: 10px;
+  }
+
+  .mode-1 { background: url("../image/mode-1.png"); background-size: cover; }
+  .mode-2 { background: url("../image/mode-2.png"); background-size: cover; }
+  .mode-3 { background: url("../image/mode-3.png"); background-size: cover; }
+  .mode-4 { background: url("../image/mode-4.png"); background-size: cover; }
+  .mode-5 { background: url("../image/mode-5.png"); background-size: cover; }
+  .mode-6 { background: url("../image/mode-6.png"); background-size: cover; }
+  .mode-7 { background: url("../image/mode-7.png"); background-size: cover; }
 }
