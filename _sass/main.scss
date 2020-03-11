@@ -84,3 +84,7 @@ a, a:visited, a:hover, a:active {
   color: transparent;
   border-bottom: 1px solid $color-tertiary;
 }
+
+.card-body {
+  min-height: 220px;
+}
