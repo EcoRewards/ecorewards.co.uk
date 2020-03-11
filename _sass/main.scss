@@ -59,6 +59,21 @@ a, a:visited, a:hover, a:active {
   color: $color-primary;
 }
 
+.btn-primary {
+  background-color: $color-primary;
+  border-color: $color-primary;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+  background-color: darken($color-primary, 10);
+  border-color: darken($color-primary, 10);
+}
+
+.btn-primary[disabled] {
+  background-color: lighten($color-primary, 10);
+  border-color: lighten($color-primary, 10);
+}
+
 .how-does-it-work {
   max-width: 700px;
 }

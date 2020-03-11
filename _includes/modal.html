@@ -1,0 +1,69 @@
+<div id="preRegisterModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">PRE-REGISTER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-success d-none">
+        <p>
+          Thank you. Your card has been successfully registered.
+        </p>
+        <p>
+          Using your smartcard to report green travel choices will now add points and carbon savings to your account. For more information and to access Eco Rewards, go to <a href="https://www.ecorewards.org.uk">ecorewards.org.uk</a> create your personal account.
+        </p>
+      </div>
+      <div class="modal-body form-body">
+        <p>Enter your card number, travel mode and distance to get started.</p>
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 id="smartcard"
+                 pattern="^[0-9]*$"
+                 minLength={16}
+                 maxLength={18}
+                 aria-describedby="smartcardHelp"
+                 placeholder="Enter Smartcard number"
+                 required
+          />
+        </div>
+        <div class="form-group">
+          <select class="form-control text-muted" id="defaultTransportMode">
+            <option value="" selected="">Select green transport mode</option>
+            <option value="car share">Car share</option>
+            <option value="large car">Large car</option>
+            <option value="medium car">Medium car</option>
+            <option value="small car">Small car</option>
+            <option value="electric car">Electric car</option>
+            <option value="taxi">Taxi</option>
+            <option value="park and ride">Park and ride</option>
+            <option value="tram">Tram</option>
+            <option value="bus">Bus</option>
+            <option value="train">Train</option>
+            <option value="cycling">Cycling</option>
+            <option value="walk">Walk</option>
+            <option value="work from home">Work from home</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 id="distance"
+                 pattern="^[.0-9]*$"
+                 minLength={16}
+                 maxLength={18}
+                 aria-describedby="distanceHelp"
+                 placeholder="Enter normal distance in miles"
+                 required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" disabled>Pre Register</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
