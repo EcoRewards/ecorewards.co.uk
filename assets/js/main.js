@@ -9,14 +9,10 @@ $('.modal .btn-primary').on("click", function() {
   const data = {
     smartcard: $("#smartcard").val(),
     defaultTransportMode: $("#defaultTransportMode").val(),
+    previousTransportMode: $("#previousTransportMode").val(),
     defaultDistance: $("#distance").val(),
     group: group
   };
-
-  $(".modal .form-body").addClass("d-none");
-  $(".modal .btn-primary").addClass("d-none");
-  $(".modal .form-success").removeClass("d-none");
-  $(".modal .btn-secondary").text("Close");
 
   $.ajax({
     type: "POST",
