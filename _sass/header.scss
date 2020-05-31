@@ -1,5 +1,21 @@
 
-.navbar img {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.navbar {
+  img {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  p {
+    margin: 10px 0 0 0;
+
+    a {
+      margin: 0 8px;
+    }
+
+    a:last-child {
+      margin-right: 0;
+    }
+  }
+
 }
+

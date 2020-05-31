@@ -15,7 +15,7 @@ exclude:
   - Gemfile.lock
   - .idea/
   - .git/
-permalink: /posts/:title
+permalink: /bracknell/:title
 excerpt_separator: <!--more-->
 sass:
   style: compressed

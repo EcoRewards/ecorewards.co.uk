@@ -1,0 +1,120 @@
+---
+title: Eco Rewards - Rewarding Green Travel Choices
+description: Earn reward points for making greener travel choices
+layout: default
+navigation: false
+---
+
+{% include bracknell-jumbotron.html %}
+
+<div class="album py-5 bg-light">
+
+  <div class="container">
+    <div class="row justify-content-md-center mb-5">
+      <div class="col-md-8">
+        <div class="text-center"><h2>Proudly supported by</h2></div>
+        <div class="row justify-content-md-center">
+          <div class="col-md-6">
+            <img class="border rounded img-responsive" src="/assets/image/bracknell-logo2.jpg" />
+          </div>
+          <div class="col-md-6">
+            <img class="border rounded img-responsive" src="/assets/image/smart-city.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="text-center"><h2>How does it work?</h2></div>
+        <iframe width="725" height="408" src="https://www.youtube.com/embed/6xY-866a9ZU" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+        <p class="my-3">
+          Participants in the scheme register online and record their journey choices by
+          tapping their smart tags, rail smartcard or existing Bracknell e+ cards on the Eco
+          Rewards blue readers. The readers will send the data back over the Smart Berkshire
+          private Internet of Things network.
+        </p>
+        <p>
+          You can collect an Eco Rewards smart tag from local retailers and participating
+          organisations.
+        </p>
+        <div class="text-center"><h4>Or</h4></div>
+        <p class="my-3">
+          Participants will also be able to report their green journeys via an online form
+          (coming soon). We will calculate your CO2 savings and green miles. Over time,
+          participants will see their carbon savings grow, both as an individual and as a
+          member of the community.
+        </p>
+        <p>
+          You will be entered into prize draws and are eligible to access retailer discounts and
+          cashback. You can see your points, savings and access to benefits by completing
+          logging on to your account. <br/>Visit <a href="https://www.ecorewards.org.uk">www.ecorewards.org.uk</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="text-center"><h2>Get started</h2></div>
+        <p>
+          Just collect a smart tag or use your e+ card or rail smart card.
+          Start tapping your card on the blue reader and <a href="https://www.ecorewards.org.uk/secure/register.php">register your card</a>
+          with green travel mode and overall usual journey distance.
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center mb-5">
+      <div class="col-md-8">
+        <div class="row justify-content-md-center">
+          <div class="col-md-4">
+            <img src="/assets/image/e-plus.jpg" width="100%" />
+          </div>
+          <div class="col-md-4">
+            <img src="/assets/image/swr.jpg" width="100%" />
+          </div>
+          <div class="col-md-4">
+            <img src="/assets/image/bracknell-town.png" width="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center text-center">
+      <div class="col-md-8">
+        <h2>Latest News & Updates</h2>
+        {% for post in site.posts limit: 10 %}
+          <div class="card shadow-sm mt-3 text-left">
+            <div class="card-link" onclick="location.href='{{post.url}}'">
+              <div class="row card-body p-0">
+                <div class="col-sm-4">
+                  <div class="post-image" style="background: url(/assets/image/post/{{post.image}}) center"></div>
+                </div>
+                <div class="col-sm-8 p-0 pt-3">
+                  <h4 class="invert-header m-0 p-0">
+                    {{post.title}}
+                  </h4>
+                  <p class="mt-3 mb-3 mr-4">
+                    <span>{{ post.description | slice: 0,162 }}</span>
+                    ...<a href="{{post.url}}">continue reading</a>.
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <p>If you represent an organisation or are based in another area, please <a href="/contact">contact us</a> for
+        more information.</p>
+    </div>
+  </div>
+</div>
+
+

@@ -3,9 +3,17 @@ footer {
   background-color: $bg-color-3;
   padding-top: 1rem;
   padding-bottom: 3rem;
-}
 
-footer p {
-  margin-bottom: .25rem;
-  color: $color-white;
+  p {
+    margin-bottom: .25rem;
+    color: $color-white;
+  }
+
+  .float-left a {
+    margin: 0 10px;
+  }
+
+  .float-left a:first-child {
+    margin-left: 0;
+  }
 }

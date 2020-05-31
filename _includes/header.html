@@ -1,31 +1,19 @@
 <header>
-  <div class="collapse" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">Eco Rewards offers rewards and incentives for schools, businesses and
-            communities to encourage residents and students to choose greener travel
-            options and reduce their carbon footprint.</p>
-          <p>To see your savings and access benefits, visit <a href="https://www.ecorewards.org.uk">www.ecorewards.org.uk</a></p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="mailto:support@ecorewards.org.uk">support@ecorewards.org.uk</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="navbar navbar-light shadow-sm">
     <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <img width="240px" src="./assets/image/eco-rewards-logo.png" />
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <img width="240px" src="/assets/image/eco-rewards-logo.png" />
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
+      {% if page.navigation == false %}
+        <h2 class="invert-header m-0">Bracknell Forest Scheme</h2>
+      {% else %}
+        <p>
+          <a href="/">Home</a> |
+          <a href="/about">About</a> |
+          <a href="/contact">Contact</a>
+        </p>
+      {% endif %}
     </div>
   </div>
 </header>

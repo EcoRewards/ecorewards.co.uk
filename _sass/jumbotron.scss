@@ -7,13 +7,19 @@
   background-size: cover;
   background-position: 0 -60px;
   color: $color-black;
+  max-height: 575px;
+  border-radius: 0;
 }
 
 
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 4rem;
-    padding-bottom: 0rem;
+    padding-bottom: 0;
+  }
+
+  .mini {
+    padding-bottom: 1rem;
   }
 }
 
