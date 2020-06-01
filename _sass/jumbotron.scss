@@ -1,14 +1,18 @@
 
 .jumbotron {
   padding-top: 3rem;
-  padding-bottom: 3rem;
   margin-bottom: 0;
   background-image: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.45) 100%), url("../image/jumbotron-background.jpg");
   background-size: cover;
   background-position: 0 -60px;
   color: $color-black;
-  max-height: 575px;
   border-radius: 0;
+  max-height: 810px;
+
+  @media ($screen-tablet) {
+    padding-bottom: 3rem;
+    max-height: 575px;
+  }
 }
 
 

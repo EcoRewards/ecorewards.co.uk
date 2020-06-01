@@ -27,7 +27,7 @@ navigation: false
     <div class="row justify-content-md-center">
       <div class="col-md-8">
         <div class="text-center"><h2>How does it work?</h2></div>
-        <iframe width="725" height="408" src="https://www.youtube.com/embed/6xY-866a9ZU" frameborder="0"
+        <iframe class="youtube" src="https://www.youtube.com/embed/6xY-866a9ZU" frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
 
@@ -89,11 +89,11 @@ navigation: false
         {% for post in site.posts limit: 10 %}
           <div class="card shadow-sm mt-3 text-left">
             <div class="card-link" onclick="location.href='{{post.url}}'">
-              <div class="row card-body p-0">
+              <div class="row card-body news-body">
                 <div class="col-sm-4">
                   <div class="post-image" style="background: url(/assets/image/post/{{post.image}}) center"></div>
                 </div>
-                <div class="col-sm-8 p-0 pt-3">
+                <div class="col-sm-8 pt-3">
                   <h4 class="invert-header m-0 p-0">
                     {{post.title}}
                   </h4>
