@@ -1,0 +1,134 @@
+---
+title: Report Journey
+description: Earn reward points for making greener travel choices
+layout: default
+---
+
+{% include mini-jumbotron.html %}
+
+<div class="album py-5 bg-light">
+  <div class="container vertical-fill">
+    <div class="row justify-content-md-center">
+      <form class="travel-form col-md-8">
+        <p class="mb-3">
+          If you have an Eco Rewards ID, you can use this form to report individual green journeys in the last 7 days and up to 3 different modes a day.
+        </p>
+        <p class="mb-3">
+          If you make more than one journey on the same mode, just report the total distance that day
+        </p>
+        <p>
+          Any images submitted must not contain personal information, illegal content or inappropriate content. Images will be archived or deleted after 30 days.
+        </p>
+        <div class="form-group row">
+          <label for="smartcard" class="col-sm-3 text-right col-form-label">Smartcard number</label>
+          <div class="col-sm-9">
+            <input type="text"
+                 class="form-control"
+                 id="smartcard"
+                 name="memberId"
+                 pattern="^[0-9]*$"
+                 minLength="16"
+                 maxLength="18"
+                 aria-describedby="smartcardHelp"
+                 placeholder="e.g. 6338000000000001"
+                 required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mode" class="col-sm-3 text-right col-form-label">Travel mode</label>
+          <div class="col-sm-9">
+            <select class="form-control text-muted" id="mode" name="mode">
+              <option value="" selected="">Select green transport mode</option>
+              <option value="car share">Car share</option>
+              <option value="large car">Large car</option>
+              <option value="medium car">Medium car</option>
+              <option value="small car">Small car</option>
+              <option value="electric car">Electric car</option>
+              <option value="taxi">Taxi</option>
+              <option value="park and ride">Park and ride</option>
+              <option value="tram">Tram</option>
+              <option value="bus">Bus</option>
+              <option value="train">Train</option>
+              <option value="cycling">Cycling</option>
+              <option value="walk">Walk</option>
+              <option value="work from home">Work from home</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="date" class="col-sm-3 text-right col-form-label">Date of travel</label>
+          <div class="col-sm-9">
+            <input type="date"
+                   class="form-control"
+                   id="date"
+                   name="date"
+                   min="{{ "now" | date: "%s" | minus: 604800 | date: "%Y-%m-%d" }}"
+                   max="{{ "now" | date: "%Y-%m-%d" }}"
+                   placeholder="Select date"
+                   required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mode" class="col-sm-3 text-right col-form-label">Distance (miles)</label>
+          <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="distance"
+                   name="distance"
+                   pattern="^[.0-9]*$"
+                   aria-describedby="distanceHelp"
+                   placeholder="Enter overall distance in miles"
+                   required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="image" class="col-sm-3 text-right col-form-label">Image</label>
+          <div class="col-sm-9">
+            <input type="file"
+                   class="form-control-file"
+                   id="image"
+                   name="image"
+                   accept="image/*"
+                   placeholder="Please select an image that shows proof of travel"
+            />
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-primary travel">Submit Travel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="reportJourneyModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">JOURNEY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-success">
+        <p>
+          Thank you, your journey is being processed and your rewards and carbon saving will be calculated shortly.
+        </p>
+        <p>
+          For more information and to access your Eco Rewards account, go to <a href="https://www.ecorewards.org.uk">ecorewards.org.uk</a>.
+        </p>
+      </div>
+      <div class="modal-body form-error">
+        <p>There was an error processing your journey.</p>
+        <p class="modal-errors"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
