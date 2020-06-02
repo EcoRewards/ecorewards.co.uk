@@ -5,15 +5,14 @@
         <img width="240px" src="/assets/image/eco-rewards-logo.png" />
       </a>
 
-      {% if page.navigation == false %}
-        <h2 class="invert-header m-0">Bracknell Forest Scheme</h2>
-      {% else %}
-        <p>
-          <a href="/">Home</a> |
-          <a href="/about">About</a> |
-          <a href="/contact">Contact</a>
-        </p>
+      {% if page.subtitle %}
+        <h2 class="invert-header m-0">{{ page.subtitle }}</h2>
       {% endif %}
+      <p>
+        <a href="/">Home</a> |
+        <a href="/about">About</a> |
+        <a href="/contact">Contact</a>
+      </p>
     </div>
   </div>
 </header>

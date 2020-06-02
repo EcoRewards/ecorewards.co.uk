@@ -1,39 +1,57 @@
 
-let group = "";
+$(".travel-form").on("submit", e => {
+  e.preventDefault();
 
-$('a[data-toggle="modal"]').on("click", function (e) {
-  group = $(this).attr("data-group");
-});
+  const submitButton = $(".travel-form button");
+  const title = $(".modal-title");
+  const formSuccess = $(".form-success");
+  const formErrors = $(".form-error");
+  const errors = $(formErrors, ".modal-errors");
+  const modalContainer = $("#reportJourneyModal");
 
-$('.modal .btn-primary').on("click", function() {
-  const data = {
-    smartcard: $("#smartcard").val(),
-    defaultTransportMode: $("#defaultTransportMode").val(),
-    previousTransportMode: $("#previousTransportMode").val(),
-    defaultDistance: $("#distance").val(),
-    group: group
-  };
+  submitButton.prop("disabled", true);
+  document.cookie = "memberId=" + $("#smartcard").val() + ";SameSite=Strict";
+
+  const url = ["aHR0cHM6", "Ly9hcGkuZWN", "vcmV3YXJkcy5", "jby51ay9qb3VybmV5"].join("").atob();
 
   $.ajax({
+    url,
     type: "POST",
-    url: "https://api.ecorewards.co.uk/member",
-    data: data,
-    success: () => {
-      $(".modal .form-body").addClass("d-none");
-      $(".modal .btn-primary").addClass("d-none");
-      $(".modal .form-success").removeClass("d-none");
-      $(".modal .btn-secondary").text("Close");
+    data: new FormData($(".travel-form")[0]),
+    processData: false,
+    contentType: false,
+    success: (data, status) => {
+      formErrors.hide();
+      formSuccess.show();
+      title.text("Success");
+    },
+    error: (xhr, desc, err) => {
+      formErrors.show();
+      formSuccess.hide();
+      title.text("Error");
+      if (xhr.status === 400) {
+        errors.html(xhr.responseJSON.data.errors.map(e => e + "<br/>"));
+      }
+      else {
+        errors.text("Please ensure you have tapped your card and completed your registration before reporting journeys");
+      }
+    },
+    complete: () => {
+      submitButton.prop("disabled", false);
+      modalContainer.modal();
     }
   });
 });
 
-$(".modal input, .modal select").on("change", function() {
-  const smartcard = $("#smartcard").val();
-  const defaultTransportMode = $("#defaultTransportMode").val();
-  const defaultDistance = $("#distance").val();
+$(".travel-form").ready(() => {
+  const cookies = document.cookie.split(";").reduce((index, cookie) => {
+    const [key, value] = cookie.split("=");
+    index[key.trim()] = value;
 
-  const smartcardNumberValid = smartcard.length === 16 || smartcard.length === 18;
-  const canSubmit = smartcardNumberValid && defaultTransportMode !== "" && defaultDistance > 0 && group !== "";
+    return index;
+  }, {});
 
-  $('.modal .btn-primary').attr("disabled", !canSubmit);
+  if (cookies["memberId"]) {
+    $("#smartcard").val(cookies["memberId"]);
+  }
 });
