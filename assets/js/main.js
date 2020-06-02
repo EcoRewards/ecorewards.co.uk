@@ -55,3 +55,7 @@ $(".travel-form").ready(() => {
     $("#smartcard").val(cookies["memberId"]);
   }
 });
+
+$("#confirm").change(() => {
+  $(".travel-form button").prop("disabled", !$("#confirm").prop("checked"));
+});
