@@ -11,17 +11,14 @@ layout: default
     <div class="row justify-content-md-center">
       <form class="travel-form col-md-8">
         <p class="mb-3">
-          If you have an Eco Rewards ID, smart tag or registered smartcard, you can use this form to report individual green journeys in the past 7 days and up to 3 different modes a day. Any duplicate or excess reports will not be added to your account.
-        </p>
-        <p class="mb-3">
-          If you make more than one journey on the same mode, just report the total distance for that day.
+          If you have an Eco Rewards ID, smart tag or registered smartcard, you can use this form to report individual green journeys in the past 7 days and up to 3 different modes a day.
         </p>
         <p>
-          Optional - please provide evidence such as picture of ticket or screenshot from walking app. Any images submitted must not contain personal information, illegal content or inappropriate content<sup>*</sup>.
+          If you make more than one journey on the same mode, just report the total distance for that day.
         </p>
         <div class="form-group row">
-          <label for="smartcard" class="col-sm-3 text-right col-form-label">Smartcard number</label>
-          <div class="col-sm-9">
+          <label for="smartcard" class="col-sm-4 text-right col-form-label">Smartcard number</label>
+          <div class="col-sm-6">
             <input type="text"
                  class="form-control"
                  id="smartcard"
@@ -36,14 +33,11 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <label for="mode" class="col-sm-3 text-right col-form-label">Travel mode</label>
-          <div class="col-sm-9">
+          <label for="mode" class="col-sm-4 text-right col-form-label">Travel mode</label>
+          <div class="col-sm-6">
             <select class="form-control text-muted" id="mode" name="mode">
               <option value="" selected="">Select green transport mode</option>
               <option value="car share">Car share</option>
-              <option value="large car">Large car</option>
-              <option value="medium car">Medium car</option>
-              <option value="small car">Small car</option>
               <option value="electric car">Electric car</option>
               <option value="taxi">Taxi</option>
               <option value="park and ride">Park and ride</option>
@@ -57,8 +51,8 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <label for="date" class="col-sm-3 text-right col-form-label">Date of travel</label>
-          <div class="col-sm-9">
+          <label for="date" class="col-sm-4 text-right col-form-label">Date of travel</label>
+          <div class="col-sm-6">
             <input type="date"
                    class="form-control"
                    id="date"
@@ -71,8 +65,8 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <label for="mode" class="col-sm-3 text-right col-form-label">Distance (miles)</label>
-          <div class="col-sm-9">
+          <label for="mode" class="col-sm-4 text-right col-form-label">Distance (miles)</label>
+          <div class="col-sm-6">
             <input type="text"
                    class="form-control"
                    id="distance"
@@ -85,8 +79,8 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <label for="image" class="col-sm-3 text-right col-form-label">Image</label>
-          <div class="col-sm-9">
+          <label for="image" class="col-sm-4 text-right col-form-label">Image (optional see below)</label>
+          <div class="col-sm-6">
             <input type="file"
                    class="form-control-file"
                    id="image"
@@ -97,22 +91,30 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-sm-3">
+          <div class="col-sm-4">
           </div>
-          <div class="col-sm-9">
-            <label for="confirm" style="padding-top: -4px">I can confirm this is a genuine green journey</label>
-            <div class="d-inline pt-3"><input id="confirm" type="checkbox" checked/></div>
+          <div class="col-sm-6">
+            <input id="confirm" type="checkbox"/>
+            <label for="confirm">I can confirm this is a genuine green journey</label>
           </div>
         </div>
-        <div class="form-group text-center">
-          <button type="submit" class="btn btn-primary travel">SUBMIT</button>
+        <div class="form-group row">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-6">
+            <button type="submit" disabled class="btn btn-primary travel">SUBMIT</button>
+          </div>
         </div>
         <p class="text-muted mt-5 mb-3">
           To see your carbon savings and access benefits, visit <a href="https://www.ecorewards.org.uk">https://www.ecorewards.org.uk</a> and logon to your account.
           If you have any questions or feedback, please <a href="/contact">contact us</a>.
         </p>
         <p class="text-muted">
-          <sup>*</sup> To establish and demonstrate confidence in self-reporting, we would love to see more detail about your journey and any walking-cycling apps you are using. Images will be held anonymously and archived or deleted after 30 days.
+          Any duplicate or excess reports will not be added to your account.
+        </p>
+        <p class="text-muted">
+          Optional - please provide evidence such as picture of ticket or screenshot from walking app. Any images submitted must not contain personal information, illegal content or inappropriate content<sup>*</sup>.
+          To establish and demonstrate confidence in self-reporting, we would love to see more detail about your journey and any walking-cycling apps you are using. Images will be held anonymously and archived or deleted after 30 days.
         </p>
       </form>
     </div>

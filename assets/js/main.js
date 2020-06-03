@@ -33,7 +33,7 @@ $(".travel-form").on("submit", e => {
         errors.html(xhr.responseJSON.data.errors.map(e => e + "<br/>"));
       }
       else {
-        errors.text("Please ensure you have tapped your card and completed your registration before reporting journeys");
+        errors.text("Please enter your Eco Rewards ID or registered card number");
       }
     },
     complete: () => {
