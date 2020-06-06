@@ -59,3 +59,12 @@ $(".travel-form").ready(() => {
 $("#confirm").change(() => {
   $(".travel-form button").prop("disabled", !$("#confirm").prop("checked"));
 });
+
+$("#date").ready(() => {
+  const now = new Date();
+  const eightDaysAgo = new Date(now.getTime() - 604800000);
+
+  $("#date")
+      .prop("min", eightDaysAgo.toJSON().substr(0, 10))
+      .prop("max", now.toJSON().substr(0, 10));
+})
