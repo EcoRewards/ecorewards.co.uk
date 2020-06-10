@@ -1,6 +1,6 @@
 .heading {
-  // background-image: url($texture);
-  // background-repeat: repeat;
+  background-image: url($texture);
+  background-repeat: repeat;
   clip-path: polygon(0 0, 100% 12%, 100% 88%, 0% 100%);
   color: $color-white;
   display: inline-block;

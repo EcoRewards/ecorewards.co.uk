@@ -4,7 +4,7 @@
   margin-bottom: 0;
   background-image: linear-gradient(to bottom, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.45) 100%), url("../image/jumbotron-background.jpg");
   background-size: cover;
-  background-position: 0 -60px;
+  background-repeat: no-repeat;
   color: $color-black;
   border-radius: 0;
   max-height: 810px;
