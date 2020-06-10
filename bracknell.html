@@ -7,26 +7,13 @@ subtitle: Bracknell Forest Scheme
 
 {% include bracknell-jumbotron.html %}
 
-<div class="album py-5 bg-light">
+{% include bracknell-motivation.html %}
 
+{% include benefits.html %}
+
+<section id="how" class="pt-5 pb-5">
   <div class="container">
-    <div class="row justify-content-md-center mb-5">
-      <div class="col-md-8">
-        <div class="text-center">
-          <h2 class="heading heading--md heading--color-1 mb-5">Proudly supported by</h2>
-        </div>
-        <div class="row justify-content-md-center">
-          <div class="col-md-6">
-            <img class="border rounded img-responsive" src="/assets/image/bracknell-logo2.jpg" />
-          </div>
-          <div class="col-md-6">
-            <img class="border rounded img-responsive" src="/assets/image/smart-city.jpg" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row justify-content-md-center mb-5">
+    <div class="row justify-content-md-center">
       <div class="col-md-8">
         <div class="text-center">
           <h2 class="heading heading--md heading--color-1 heading--reverse-clip mb-5">How does it work?</h2>
@@ -59,21 +46,47 @@ subtitle: Bracknell Forest Scheme
         </p>
       </div>
     </div>
+  </div>
+</section>
 
+{% include participate.html %}
+
+<section class="pt-5 pb-5">
+  <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-8">
         <div class="text-center">
           <h2 class="heading heading--md heading--color-1 mb-5">Get started</h2>
         </div>
         <p>
-          Just collect a smart tag or use your e+ card or rail smart card.
+          Just collect a smart tag or use your e+ card or rail smartcard.
           Start tapping your card on the blue reader and <a href="https://www.ecorewards.org.uk/secure/register.php">register your card</a>
           with green travel mode and overall usual journey distance.
         </p>
-        <img class="rounded mb-5" src="/assets/image/tags.jpg" width="100%" />
+        <img class="rounded" src="/assets/image/tags.jpg" width="100%" />
       </div>
     </div>
   </div>
+</section>
 
-  {% include news.html %}
-</div>
+{% include news.html %}
+
+<section id="proud" class="bg-light pt-5 pb-5">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="text-center">
+          <h2 class="heading heading--md heading--color-1 mb-5">Proudly supported by</h2>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-md-6">
+            <img class="border rounded img-responsive" src="/assets/image/bracknell-logo2.jpg" />
+          </div>
+          <div class="col-md-6">
+            <img class="border rounded img-responsive" src="/assets/image/smart-city.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
