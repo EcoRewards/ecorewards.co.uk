@@ -128,10 +128,11 @@ a, a:visited, a:hover, a:active {
 }
 
 .youtube {
-  width: 400px;
+  width: 345px;
   height: 225px;
+
   @media ($screen-tablet) {
-    width: 725px;
+    width: 690px;
     height: 408px;
   }
 }
@@ -140,4 +141,9 @@ a, a:visited, a:hover, a:active {
   @media ($screen-tablet) {
     padding: 0;
   }
+}
+
+.navbar {
+  padding-right: 0;
+  padding-left: 0;
 }
