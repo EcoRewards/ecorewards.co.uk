@@ -1,0 +1,53 @@
+.participate {
+    background-color: $bg-color-4;
+    color: $color-white;
+
+    &__img {
+        margin: 0 auto 20px;
+        height: 80px;
+
+        @media ($screen-tablet) {
+            margin-bottom: 30px;
+        }
+
+        @media ($screen-laptop) {
+            height: 120px;
+        }
+    }
+
+    &__text {
+        color: white;
+        margin: 0 auto 20px auto;
+        max-width: 275px;
+
+        @media ($screen-tablet) {
+            margin: 0 auto 30px auto;
+        }
+
+        @media ($screen-laptop) {
+            font-size: 18px;
+            max-width: 220px;
+        }
+    }
+
+    &__step {
+        background-color: $color-white;
+        border-radius: 100%;
+        color: $bg-color-4;
+        font-family: $font-header;
+        font-size: 28px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 auto 20px auto;
+        text-align: center;
+        width: 40px;
+
+        @media ($screen-tablet) {
+            font-size: 40px;
+            height: 65px;
+            line-height: 65px;
+            margin: 0 auto 30px auto;
+            width: 65px;
+        }
+    }
+}
