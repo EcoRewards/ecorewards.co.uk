@@ -1,0 +1,26 @@
+.benefits {
+    &__img {
+        margin: 0 auto 20px;
+        height: 100px;
+
+        @media ($screen-laptop) {
+            margin: 0 20px 20px 0;
+            width: 100px;
+            height: auto;
+        }
+    }
+
+    &__text {
+        font-family: $font-header;
+        font-size: 22px;
+        line-height: 27px;
+        margin: 0 auto 30px auto;
+        max-width: 275px;
+
+        @media ($screen-laptop) {
+            font-size: 30px;
+            line-height: 40px;
+            max-width: none;
+        }
+    }
+}

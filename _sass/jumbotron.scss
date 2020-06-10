@@ -47,10 +47,13 @@
   display: none;
   position: relative;
   top: -80px;
-  left: 90px;
 
   @media ($screen-tablet) {
     display: flex;
+  }
+
+  @media ($screen-laptop) {
+    padding-right: 60px;
   }
 
   div {
