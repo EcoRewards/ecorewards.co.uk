@@ -6,6 +6,7 @@
     </button>
 
     <ul class="js-nav list-unstyled nav__list">
+        {% if page.anchorLinks %}
         <li class="nav__item">
             <a class="js-nav-link nav__link" href="#objectives">Objectives</a>
         </li>
@@ -24,6 +25,11 @@
         <li class="nav__item">
             <a class="js-nav-link nav__link" href="#news">Latest News</a>
         </li>
+        {% else %}
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="{{ site.baseurl }}/index">Home</a>
+        </li>
+        {% endif %}
         <li class="nav__item">
             <a class="nav__link" href="{{ site.baseurl }}/about">About us</a>
         </li>
