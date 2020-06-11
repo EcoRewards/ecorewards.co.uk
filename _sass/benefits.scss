@@ -4,13 +4,14 @@
         height: 100px;
 
         @media ($screen-laptop) {
-            margin: 0 20px 20px 0;
+            margin: 0 30px 20px 0;
             width: 100px;
             height: auto;
         }
     }
 
     &__text {
+        color: lighten($color-font, 15%);
         font-family: $font-header;
         font-size: 22px;
         line-height: 27px;
@@ -19,7 +20,7 @@
 
         @media ($screen-laptop) {
             font-size: 30px;
-            line-height: 40px;
+            line-height: 36px;
             max-width: none;
         }
     }
