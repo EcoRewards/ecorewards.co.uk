@@ -40,6 +40,7 @@
         height: 40px;
         line-height: 40px;
         margin: 0 auto 20px auto;
+        position: relative;
         text-align: center;
         width: 40px;
 
@@ -49,6 +50,29 @@
             line-height: 65px;
             margin: 0 auto 30px auto;
             width: 65px;
+        }
+    }
+
+    &__arrow {
+        &:before {
+            @media ($screen-tablet) {
+                content: "";
+                background: transparent url($arrow) no-repeat center center;
+                background-size: 51px 30px;
+                display: block;
+                height: 30px;
+                position: absolute;
+                right: -25px;
+                top: 32%;
+                width: 51px;
+            }
+
+            @media ($screen-laptop) {
+                background-size: 68px 40px;
+                height: 40px;
+                right: -30px;
+                width: 68px;
+            }
         }
     }
 }
