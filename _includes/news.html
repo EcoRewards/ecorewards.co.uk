@@ -1,32 +1,30 @@
 <section id="news" class="pt-5 pb-5 bg-light">
-    <div class="container">
-        <div class="row justify-content-md-center text-center">
-            <div class="col-md-8">
-              <h2 class="heading heading--md heading--color-1 mb-5">Latest News & Updates</h2>
-              {% for post in site.posts limit: 10 %}
-                <div class="card shadow-sm mt-3 text-left">
-                  <div class="card-link" onclick="location.href='{{post.url}}'">
-                    <div class="row card-body news-body">
-                      <div class="col-sm-4">
-                        <div class="post-image" style="background: url({{site.baseurl}}/assets/image/post/{{post.image}}) center"></div>
-                      </div>
-                      <div class="col-sm-8 pt-3">
-                        <h4 class="invert-header m-0 p-0">
-                          {{post.title}}
-                        </h4>
-                        <p class="mt-3 mb-3 mr-4">
-                          <span>{{ post.description | slice: 0,162 }}</span>
-                          ...<a href="{{ site.baseurl }}{{post.url}}">continue reading</a>.
-                        </p>
-        
-                      </div>
-                    </div>
-                  </div>
+  <div class="container">
+    <div class="row justify-content-md-center text-center">
+      <div class="col-md-8">
+        <h2 class="heading heading--md heading--color-1 mb-5">Latest News & Updates</h2>
+        {% for post in site.posts limit: 10 %}
+          <div class="card shadow-sm mt-3 text-left">
+            <div class="card-link" onclick="location.href='{{post.url}}'">
+              <div class="row card-body news-body">
+                <div class="col-sm-4">
+                  <div class="post-image" style="background: url({{site.baseurl}}/assets/image/post/{{post.image}}) center"></div>
                 </div>
-              {% endfor %}
+                <div class="col-sm-8 pt-3">
+                  <h4 class="invert-header m-0 p-0">
+                    {{post.title}}
+                  </h4>
+                  <p class="mt-3 mb-3 mr-4">
+                    <span>{{ post.description | slice: 0,162 }}</span>
+                    ...<a href="{{ site.baseurl }}{{post.url}}">continue reading</a>.
+                  </p>
+                </div>
+              </div>
             </div>
-        </div>
-
-        <p class="text-center mt-5">If you represent an organisation or are based in another area, please <a href="/contact">contact us</a> for more information.</p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
+    <p class="text-center mt-5">If you represent an organisation or are based in another area, please <a href="/contact">contact us</a> for more information.</p>
+  </div>
 </section>

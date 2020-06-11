@@ -2,13 +2,9 @@
   <div class="navbar navbar-light shadow-sm">
     <div class="container d-flex justify-content-between">
       <a href="{{ site.baseurl }}/" class="navbar-brand d-flex align-items-center">
-        <img width="240px" src="{{ site.baseurl }}/assets/image/eco-rewards-logo.png" />
+        <img width="240px" alt="eco rewards logo" src="{{ site.baseurl }}/assets/image/eco-rewards-logo.png" />
+        <span class="sr-only">Home</span>
       </a>
-
-      {% if page.subtitle %}
-        <h2 class="invert-header m-0">{{ page.subtitle }}</h2>
-      {% endif %}
-
       {% include nav.html %}
     </div>
   </div>
