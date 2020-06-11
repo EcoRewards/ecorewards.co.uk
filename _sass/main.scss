@@ -84,12 +84,14 @@ a, a:visited, a:hover, a:active {
 }
 
 .bracknell-logo {
-  background-image: url("../image/bracknell-logo.jpg");
+  background-image: url("../image/bracknell-logo.svg");
+  background-position: center center;
   background-size: cover;
 }
 
 .bracknell-station {
   background-image: url("../image/bracknell-station.png");
+  background-position: center center;
   background-size: cover;
 }
 
