@@ -5,6 +5,10 @@ layout: default
 subtitle: Bracknell Forest Scheme
 ---
 
+{% if page.subtitle %}
+  {% include bracknell-logo.html %}
+{% endif %}
+
 {% include bracknell-jumbotron.html %}
 
 {% include bracknell-motivation.html %}
