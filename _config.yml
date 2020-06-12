@@ -4,7 +4,7 @@ email: linusnorton@gmail.com
 description: >-
   Rewarding Green Travel Choices
 url: "https://www.ecorewards.co.uk/"
-baseurl: "/ecorewards.co.uk"
+baseurl: ""
 lang: "en"
 plugins:
   - jekyll-minifier
