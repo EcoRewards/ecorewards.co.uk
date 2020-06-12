@@ -1,0 +1,40 @@
+<nav class="nav">
+    <button class="js-nav-toggle nav__toggle" type="button" aria-label="Menu" aria-controls="navigation" aria-expanded="false">
+        <span class="nav__toggle-box">
+            <span class="nav__toggle-inner"></span>
+        </span>
+    </button>
+
+    <ul class="js-nav list-unstyled nav__list">
+        {% if page.anchorLinks %}
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#objectives">Objectives</a>
+        </li>
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#benefits">Benefits</a>
+        </li>
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#how">How does it work?</a>
+        </li>
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#participate">How to participate</a>
+        </li>
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#start">Get started</a>
+        </li>
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="#news">Latest News</a>
+        </li>
+        {% else %}
+        <li class="nav__item">
+            <a class="js-nav-link nav__link" href="{{ site.baseurl }}/index">Home</a>
+        </li>
+        {% endif %}
+        <li class="nav__item">
+            <a class="nav__link" href="{{ site.baseurl }}/about">About us</a>
+        </li>
+        <li class="nav__item">
+            <a class="nav__link" href="{{ site.baseurl }}/contact">Contact</a>
+        </li>
+    </ul>
+</nav>

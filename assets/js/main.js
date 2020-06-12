@@ -68,3 +68,33 @@ $("#date").ready(() => {
       .prop("min", eightDaysAgo.toJSON().substr(0, 10))
       .prop("max", now.toJSON().substr(0, 10));
 })
+
+// Scroll
+function goToByScroll(id){
+  $('html,body').animate({
+      scrollTop: $(id).offset().top
+  }, 700);
+  scrolled = true;
+}
+
+// Toggle Nav Menu
+function toggleMenu() {
+  $(".js-nav-toggle").attr('aria-expanded', function (i, attr) {
+    return attr == 'true' ? 'false' : 'true'
+  });
+  $(".js-nav-toggle").toggleClass("is-active");
+  $(".js-nav").toggleClass("is-open");
+}
+
+// Click nav toggle
+$(".js-nav-toggle").click(function() {
+  toggleMenu();
+});
+
+// Scroll to section of page
+$(".js-nav-link").click(function(e) {
+  e.preventDefault();
+  toggleMenu();
+  var link = $(this).attr('href');
+  goToByScroll(link);
+});

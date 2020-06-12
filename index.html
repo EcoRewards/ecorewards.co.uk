@@ -2,19 +2,25 @@
 title: Eco Rewards - Rewarding Green Travel Choices
 description: Earn reward points for making greener travel choices
 layout: default
+anchorLinks: true
 ---
 
 {% include jumbotron.html %}
 
-<div class="album py-5 bg-light">
+{% include motivation.html %}
 
+{% include objectives.html %}
+
+{% include benefits.html %}
+
+<section id="how" class="pt-5 pb-5 bg-light">
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col-md-8 text-center">
-        <h2>How does it work?</h2>
+      <div class="col-lg-8 text-center">
+        <h2 class="heading heading--md heading--color-1 mb-5">How does it work?</h2>
         <iframe class="youtube" src="https://www.youtube.com/embed/6xY-866a9ZU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p>
-          Once you have a pre-registered smart tag or card, tap on an Eco Rewards
+          Once you have a pre-registered smart tag or smartcard, tap on an Eco Rewards
           reader as you travel to and from work, school or college. We will calculate
           your points, CO<sub>2</sub> savings and green miles. Participants will also be able to report their green journeys via an online form (coming
           soon).
@@ -27,45 +33,50 @@ layout: default
         <p>To see your savings and access benefits, visit <a href="https://www.ecorewards.org.uk">www.ecorewards.org.uk</a></p>
       </div>
     </div>
+  </div>
+</section>
 
+{% include participate.html %}
+
+<section id="start" class="pt-5 pb-5 bg-light">
+  <div class="container">
     <div class="row justify-content-md-center text-center">
-      <div class="col-md-8">
-        <h2>Get started</h2>
-      </div>
-    </div>
-    <br/>
-    <div class="row justify-content-md-center">
-      <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-          <div class="bracknell-logo card-image">Bracknell council logo</div>
-          <div class="card-body">
-            <p class="card-text">
-              For Eco Rewards in Bracknell and through schools, see the details of the council backed scheme.
-            </p>
-            <p class="m-0">
-              <a href="/bracknell">Bracknell</a>
-            </p>
+      <div class="col-12">
+        <h2 class="heading heading--md heading--color-1">Get started</h2>
+
+        <div class="row justify-content-md-center">
+          <div class="col-md-6 col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="bracknell-logo card-image">Bracknell council logo</div>
+              <div class="card-body">
+                <p class="card-text">
+                  For Eco Rewards in Bracknell and through schools, see the details of the council backed scheme.
+                </p>
+                <p class="m-0">
+                  <a href="{{ site.baseurl }}/bracknell">Bracknell</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="bracknell-station card-image">Bracknell station</div>
+              <div class="card-body">
+                <p class="card-text">
+                  For our commuter trial at Bracknell station, you can use you rail smartcard. Just start tapping your card on the blue reader each day and register your card to join and see your carbon savings.
+                </p>
+                <p class="m-0">
+                  <a href="https://www.ecorewards.org.uk/secure/register.php">Register your account</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-          <div class="bracknell-station card-image">Bracknell station</div>
-          <div class="card-body">
-            <p class="card-text">
-              For our commuter trial at Bracknell station, you can use you rail smartcard. Just start tapping your card on the blue reader each day and register your card to join and see your carbon savings.
-            </p>
-            <p class="m-0">
-              <a href="https://www.ecorewards.org.uk/secure/register.php">Register your account</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center">
-      <p>If you represent an organisation or are based in another area, please <a href="/contact">contact us</a> for more information.</p>
     </div>
   </div>
-</div>
+</section>
 
+{% include news.html %}
 
+{% include proud.html %}

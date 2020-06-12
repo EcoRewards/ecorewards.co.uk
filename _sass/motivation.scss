@@ -1,0 +1,18 @@
+.motivation {
+    &__title {
+        color: lighten($color-font, 15%);
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    &__img {
+        height: 100px;
+        margin: 0 auto 20px;
+
+        @media ($screen-laptop) {
+            margin: 0 30px 20px 0;
+            height: auto;
+            width: 100px;
+        }
+    }
+}

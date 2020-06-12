@@ -1,0 +1,138 @@
+.nav {
+  position: relative;
+
+  &__toggle {
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    display: inline-block;
+    cursor: pointer;
+    font: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 15px;
+    text-transform: none;
+    transition-duration: 0.15s;
+    transition-property: opacity, filter;
+    transition-timing-function: linear;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.is-active {
+      &:hover {
+        opacity: 0.8;
+      }
+  
+      .nav__toggle-inner,
+      .nav__toggle-inner::before,
+      .nav__toggle-inner::after {
+        background-color: $color-font;
+      }
+  
+      .nav__toggle-inner {
+        transform: rotate(45deg);
+        transition-delay: 0.12s;
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        &::before {
+          top: 0;
+          opacity: 0;
+          transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+        }
+
+        &::after {
+          bottom: 0;
+          transform: rotate(-90deg);
+          transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+      }
+    }
+
+    &-box {
+      width: 40px;
+      height: 24px;
+      display: inline-block;
+      position: relative;
+    }
+
+    &-inner {
+      display: block;
+      top: 50%;
+      transition-duration: 0.075s;
+      transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    
+      &,
+      &::before,
+      &::after {
+        width: 40px;
+        height: 4px;
+        background-color: $color-font;
+        border-radius: 4px;
+        position: absolute;
+        transition-property: transform;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
+      }
+    
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+      }
+    
+      &::before {
+        top: -10px;
+        transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+      }
+    
+      &::after {
+        bottom: -10px;
+        transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      }
+    }
+  }
+
+  &__list {
+    background-color: $color-white;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+    display: none;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 63px;
+    min-width: 350px;
+    z-index: 10;
+
+    &.is-open {
+      display: block;
+    }
+  }
+
+  &__item {
+    border-bottom: solid 1px $color-nav-border;
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+
+    &:last-child {
+      border-bottom: none;
+
+      .nav__link {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+    padding: 10px 10px 5px 50px;
+  }
+}

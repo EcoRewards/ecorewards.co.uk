@@ -1,0 +1,30 @@
+.subtitle {
+    &__container {
+        position: relative
+    }
+
+    &__img-container {
+        background-color: $color-white;
+        border: solid 1px $color-tertiary;
+        border-radius: 100%;
+        display: inline-block;
+        height: 80px;
+        left: 50%;
+        margin-left: -40px;
+        overflow: hidden;
+        padding-top: 13px;
+        position: absolute;
+        top: -15px;
+        width: 80px;
+        z-index: 5;
+
+        @media ($screen-tablet) {
+            height: 100px;
+            left: 50%;
+            margin-left: -50px;
+            padding-top: 16px;
+            top: -50px;
+            width: 100px;
+        }
+    }
+}
