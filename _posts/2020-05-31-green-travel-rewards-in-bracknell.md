@@ -4,11 +4,7 @@ date: 2020-05-31 02:00:00
 lastmod: 2020-05-31 02:00:00
 description: >-
   With the beautiful new pedestrianised Lexicon Centre and well-designed cycleways,
-  Bracknell Forest is already leading the way when it comes to encouraging walking
-  and cycling. A new initiative from Bracknell Forest Council wants to capitalise on the
-  behavioural shift that has come about as a result of the pandemic lockdown. With
-  more people walking and cycling and less cars on the road there has been a marked
-  improvement in air quality, not just in Bracknell but all around the globe.
+  Bracknell Forest is already leading the way 
 layout: blog
 navigation: false
 image: green-travel-rewards-in-bracknell/reader.jpg
