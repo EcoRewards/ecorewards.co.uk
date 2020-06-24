@@ -3,6 +3,8 @@
     <div class="row justify-content-md-center text-center">
       <div class="col-md-8">
         <h2 class="heading heading--md heading--color-1 mb-5">Latest News & Updates</h2>
+
+        <a class="twitter-timeline" data-height="600" href="https://twitter.com/EcoRewards?ref_src=twsrc%5Etfw">Tweets by EcoRewards</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         {% for post in site.posts limit: 10 %}
           <div class="card shadow-sm mt-3 text-left">
             <div class="card-link" onclick="location.href='{{post.url}}'">
