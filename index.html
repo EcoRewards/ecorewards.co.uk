@@ -7,15 +7,7 @@ anchorLinks: true
 
 {% include jumbotron.html %}
 
-{% include news.html %}
-
-{% include motivation.html %}
-
-{% include objectives.html %}
-
-{% include benefits.html %}
-
-<section id="how" class="pt-5 pb-5 bg-light">
+<section id="how" class="pt-5 pb-0 bg-light">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-lg-8 text-center">
@@ -32,11 +24,19 @@ anchorLinks: true
           account. If you are joining through a school, community or business we will be
           running prize draws and calculating your group savings.
         </p>
-        <p>To see your savings and access benefits, visit <a href="https://www.ecorewards.org.uk">www.ecorewards.org.uk</a></p>
+        <p class="mb-0"><a class="btn btn-primary btn-register" href="https://www.ecorewards.org.uk">Register now</a></p>
       </div>
     </div>
   </div>
 </section>
+
+{% include news.html %}
+
+{% include motivation.html %}
+
+{% include objectives.html %}
+
+{% include benefits.html %}
 
 {% include participate.html %}
 
