@@ -51,7 +51,7 @@
     const colours = ["#ffc658", "#8884d8", "#82ca9d"];
     let colourI = 0;
 
-    $.get("https://api.ecorewards.co.uk{{ page.organisation }}/report" , response => {
+    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
       const datasets = response.data.reduce((index, col) => {
         index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % 3] };
         index[col.name].data.push(col.totalRewardsEarned);
