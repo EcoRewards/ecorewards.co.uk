@@ -20,3 +20,6 @@ permalink: /bracknell/:title
 excerpt_separator: <!--more-->
 sass:
   style: compressed
+collections:
+  orgs:
+    output: true

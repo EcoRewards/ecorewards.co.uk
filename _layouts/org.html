@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="{{site.lang}}">
+{% include head.html %}
+<body>
+{% include header.html %}
+<main>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          <h2 class="heading heading--md heading--color-1">{{ page.title }} Eco Rewards Points</h2>
+          <canvas id="myChart" width="400" height="240"></canvas>
+          <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
+          <div class="form-group">
+            <label for="memberId">Member ID:</label>
+            <input type="text" class="form-control text-muted" id="memberId" pattern="^[.0-9]*$"/>
+          </div>
+
+          <div class="form-group">
+            <label for="memberGroup">Select your group from the list below:</label>
+            <select class="form-control text-muted" id="memberGroup">
+            </select>
+          </div>
+
+          <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% include modal.html %}
+{% include footer.html %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{ site.baseurl }}/assets/js/main.js"></script>
+<script type="application/javascript">
+
+  $(document).ready(() => {
+    $.get("https://api.ecorewards.co.uk/groups", response => {
+      response.data
+        .filter(group => group.organisation === "{{ page.organisation}}")
+        .map(group => $('<option>').val(group.id).text(group.name))
+        .forEach(option => option.appendTo('#memberGroup'));
+    });
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const colours = ["#ffc658", "#8884d8", "#82ca9d"];
+    let colourI = 0;
+
+    $.get("https://api.ecorewards.co.uk{{ page.organisation }}/report" , response => {
+      const datasets = response.data.reduce((index, col) => {
+        index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % 3] };
+        index[col.name].data.push(col.totalRewardsEarned);
+        return index;
+      }, {});
+      const labels = response.data.reduce((index, col) => {
+        index[col.date] = true;
+        return index;
+      }, {});
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(labels),
+          datasets: Object.values(datasets)
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    });
+
+    function toggleButton() {
+      $("#submit").attr("disabled", $("#memberId").val().length < 10);
+    }
+
+    $("#memberId").change(toggleButton);
+
+    $("#submit").on("click", () => {
+      const memberId = $("#memberId").val();
+      const data = {
+        group: $("#memberGroup").val()
+      };
+
+      $.ajax({
+        url: "https://api.ecorewards.co.uk/member/" + memberId,
+        type: "PUT",
+        data: data,
+        success: () => {
+          window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId
+        }
+      });
+    })
+  });
+
+</script>
+</body>
+</html>
