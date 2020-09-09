@@ -9,7 +9,10 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-8">
-          <h2 class="heading heading--md heading--color-1">Eco Rewards Points</h2>
+          <h2 class="heading heading--md heading--color-1">
+            <img src="/assets/image/{{ page.id }}.png" class="left" width="50px"/>
+            {{ page.title }}
+          </h2>
           <canvas id="myChart" width="400" height="240"></canvas>
           <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
           <div class="form-group">
@@ -24,6 +27,14 @@
           </div>
 
           <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
+
+        </div>
+        <div class="col-md-8">
+          <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
+          <p>
+            <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
+            <a class="btn-primary btn" style="color: white;" href="https://www.ecorewards.org.uk/">Eco Rewards Website</a>
+          </p>
         </div>
       </div>
     </div>
