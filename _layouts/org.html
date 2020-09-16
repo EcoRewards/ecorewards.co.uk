@@ -63,7 +63,7 @@
 
     $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
       const datasets = response.data.reduce((index, col) => {
-        index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % 3] };
+        index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % colours.length] };
         index[col.name].data.push(col.totalRewardsEarned);
         return index;
       }, {});
