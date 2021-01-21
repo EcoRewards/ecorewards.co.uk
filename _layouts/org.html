@@ -103,7 +103,7 @@
 
       $.ajax({
         url: "https://api.ecorewards.co.uk/member/" + memberId,
-        type: "PUT",
+        type: "PATCH",
         data: data,
         success: () => {
           window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId
