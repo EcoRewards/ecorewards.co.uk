@@ -7,7 +7,7 @@ description: >-
   Bracknell Forest is already leading the way 
 layout: blog
 navigation: false
-image: green-travel-rewards-in-bracknell/reader.jpg
+image: ../bracknell-town.png
 ---
 
 With the beautiful new pedestrianised Lexicon Centre and well-designed cycleways,
