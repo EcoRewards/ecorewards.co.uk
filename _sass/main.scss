@@ -170,3 +170,12 @@ a.btn-register, a.btn-register:hover, a.btn-register:visited, a.btn-register:act
   background-color: $bg-color-4 !important;
   border-color: $bg-color-4 !important;
 }
+
+.school-image-sm {
+  margin: 0 20px 40px 20px;
+  height: 200px;
+
+  .post-image {
+    height:100px;
+  }
+}

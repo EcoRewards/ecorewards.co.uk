@@ -7,8 +7,33 @@ anchorLinks: true
 
 <div class="album py-5 bg-light">
   <div class="container">
+
+    <div class="row justify-content-md-center">
+      <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
+        <div class="card-body">
+          <div class="post-image" style="background: url(/assets/image/orgs/epcs-rev.png) center no-repeat; background-size: 80px"></div>
+          <div class="text-center">Easthampstead Park CS</div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
+        <div class="card-body">
+          <div class="post-image" style="background: url(/assets/image/orgs/ghc.png) center no-repeat; background-size: 80px"></div>
+          <div class="text-center">Garth Hill College</div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
+        <div class="card-body">
+          <div class="post-image" style="background: url(/assets/image/orgs/warfield.png) center no-repeat; background-size: 80px"></div>
+          <div class="text-center">Warfield Primary</div>
+        </div>
+      </div>
+    </div>
+
     <div class="row justify-content-md-center">
       <div class="col-md-8">
+        <canvas id="myChart" width="400" height="240"></canvas>
         <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Member ID:</label>
@@ -21,6 +46,7 @@ anchorLinks: true
             <option value="">Please select</option>
             <option value="/organisation/2">Easthampstead Park CS</option>
             <option value="/organisation/3">Garth Hill College</option>
+            <option value="/organisation/12">Warfield Primary</option>
           </select>
         </div>
 
@@ -88,7 +114,43 @@ anchorLinks: true
           window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId
         }
       });
-    })
+    });
+
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const colours = ["#4e73df", "#1cc88a", "#f6c23e", "#36b9cc",  "#e74a3b", "#858796"];
+    const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary"]
+    let colourI = 0;
+    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
+      const datasets = response.data.reduce((index, col) => {
+        if (schools.includes(col.name)) {
+          index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % colours.length] };
+          index[col.name].data.push(col.totalRewardsEarned);
+        }
+
+        return index;
+      }, {});
+      const labels = response.data.reduce((index, col) => {
+        index[col.date] = true;
+        return index;
+      }, {});
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(labels),
+          datasets: Object.values(datasets)
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    });
   });
 
 </script>
