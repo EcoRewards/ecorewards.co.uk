@@ -112,6 +112,9 @@ anchorLinks: true
         data: data,
         success: () => {
           window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId
+        },
+        error: () => {
+          alert('Invalid member ID');
         }
       });
     });
