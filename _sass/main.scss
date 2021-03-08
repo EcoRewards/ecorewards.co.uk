@@ -179,3 +179,15 @@ a.btn-register, a.btn-register:hover, a.btn-register:visited, a.btn-register:act
     height:100px;
   }
 }
+
+.vertical-tight {
+  line-height: 25px;
+
+  .form-group {
+    margin-bottom: 0.7rem;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+}

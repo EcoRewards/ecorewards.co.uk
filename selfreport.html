@@ -6,22 +6,22 @@ layout: default
 
 {% include mini-jumbotron.html %}
 
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-light vertical-tight">
   <div class="container vertical-fill">
     <div class="row justify-content-md-center">
       <form class="travel-form col-md-8">
         <p class="mb-3">
-          If you have an Eco Rewards ID, smart tag or registered smartcard, you can use this form to report individual green journeys in the past 7 days and up to 3 different modes a day.
+          If you have an Eco Rewards ID, smart tag or registered smartcard, you can use this form to report individual green journeys and exercise in the past 7 days and up to 3 different modes a day.
         </p>
         <p>
-          If working from home put your usual home to work location return distance in miles.
+          If working from home, enter your usual home to work return distance in miles.
         </p>
         <p>
-          If you make more than one journey on the same mode, just report the total distance for that day.
+          If you make more than one journey using the same mode, just report the total distance for that day.
         </p>
         <div class="form-group row">
           <label for="smartcard" class="col-sm-4 text-right col-form-label">ID or smartcard number</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <input type="text"
                  class="form-control"
                  id="smartcard"
@@ -37,7 +37,7 @@ layout: default
         </div>
         <div class="form-group row">
           <label for="mode" class="col-sm-4 text-right col-form-label">Travel mode</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <select class="form-control text-muted" id="mode" name="mode">
               <option value="" selected="">Select green transport mode</option>
               <option value="car share">Car share</option>
@@ -50,12 +50,15 @@ layout: default
               <option value="cycling">Cycling</option>
               <option value="walk">Walk</option>
               <option value="work from home">Work from home</option>
+              <option value="jogging">Jogging</option>
+              <option value="running">Running</option>
+              <option value="rowing">Rowing</option>
             </select>
           </div>
         </div>
         <div class="form-group row">
-          <label for="date" class="col-sm-4 text-right col-form-label">Date of travel</label>
-          <div class="col-sm-6">
+          <label for="date" class="col-sm-4 text-right col-form-label">Date of journey</label>
+          <div class="col-sm-6 pl-0">
             <input type="date"
                    class="form-control"
                    id="date"
@@ -67,21 +70,21 @@ layout: default
         </div>
         <div class="form-group row">
           <label for="mode" class="col-sm-4 text-right col-form-label">Distance (miles)</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <input type="text"
                    class="form-control"
                    id="distance"
                    name="distance"
                    pattern="^[.0-9]*$"
                    aria-describedby="distanceHelp"
-                   placeholder="Enter overall distance in miles"
+                   placeholder="Enter overall distance in miles eg 3.2"
                    required
             />
           </div>
         </div>
         <div class="form-group row">
           <label for="image" class="col-sm-4 text-right col-form-label">Image (optional see below)</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <input type="file"
                    class="form-control-file"
                    id="image"
@@ -94,7 +97,7 @@ layout: default
         <div class="form-group row">
           <div class="col-sm-4">
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <input id="confirm" type="checkbox"/>
             <label for="confirm">I can confirm this is a genuine green journey</label>
           </div>
@@ -102,7 +105,7 @@ layout: default
         <div class="form-group row">
           <div class="col-sm-4">
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-6 pl-0">
             <button type="submit" disabled class="btn btn-primary travel">SUBMIT</button>
           </div>
         </div>
