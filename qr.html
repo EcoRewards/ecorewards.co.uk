@@ -1,0 +1,219 @@
+---
+title: Report Your Green Journey
+description: Earn reward points for making greener travel choices
+layout: default
+---
+
+{% include mini-jumbotron.html %}
+
+<div class="album py-5 bg-light vertical-tight">
+  <div class="container vertical-fill">
+    <div class="row justify-content-md-center">
+      <form class="travel-form col-md-8">
+        <p class="mb-3">
+          Scan your QR code
+        </p>
+        <div class="form-group row">
+          <label for="smartcard" class="col-sm-4 text-right col-form-label">ID or smartcard number</label>
+          <div class="col-sm-6 pl-0">
+            <input type="text"
+                   class="form-control"
+                   id="smartcard"
+                   name="memberId"
+                   pattern="^[0-9]*$"
+                   minLength="9"
+                   maxLength="18"
+                   aria-describedby="smartcardHelp"
+                   placeholder="e.g. 6338000000000001"
+                   required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mode" class="col-sm-4 text-right col-form-label">Travel mode</label>
+          <div class="col-sm-6 pl-0">
+            <select class="form-control text-muted" id="mode" name="mode">
+              <option value="" selected="">Select green transport mode</option>
+              <option value="car share">Car share</option>
+              <option value="electric car">Electric car</option>
+              <option value="taxi">Taxi</option>
+              <option value="park and ride">Park and ride</option>
+              <option value="tram">Tram</option>
+              <option value="bus">Bus</option>
+              <option value="train">Train</option>
+              <option value="cycling">Cycling</option>
+              <option value="walk">Walk</option>
+              <option value="work from home">Work from home</option>
+              <option value="jogging">Jogging</option>
+              <option value="running">Running</option>
+              <option value="rowing">Rowing</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mode" class="col-sm-4 text-right col-form-label">Distance (miles)</label>
+          <div class="col-sm-6 pl-0">
+            <input type="text"
+                   class="form-control"
+                   id="distance"
+                   name="distance"
+                   pattern="^[.0-9]*$"
+                   aria-describedby="distanceHelp"
+                   placeholder="Enter overall distance in miles eg 3.2"
+                   required
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mode" class="col-sm-4 text-right col-form-label">Location</label>
+          <div class="col-sm-6 pl-0">
+            <button type="button" id="scan-qr" class="btn btn-primary travel">SCAN QR CODE</button>
+            <div style="width: 100%" id="reader"></div>
+            <input type="hidden" id="deviceId" name="deviceId"/>
+            <div style="margin-top: 6px" id="locationName"></div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-6 pl-0">
+            <input type="hidden"
+                   id="dateNow"
+                   name="date"
+            />
+            <button type="submit" disabled class="btn btn-primary travel">SUBMIT</button>
+          </div>
+        </div>
+        <p class="text-muted mt-5 mb-3">
+          To see your carbon savings and access benefits, visit <a href="https://www.ecorewards.org.uk">https://www.ecorewards.org.uk</a> and logon to your account.
+          If you have any questions or feedback, please <a href="/contact">contact us</a>.
+        </p>
+        <p class="text-muted">
+          Any duplicate or excess reports will not be added to your account.
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="reportJourneyModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">JOURNEY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body form-success">
+        <p>
+          Thank you, your journey is being processed and your rewards and carbon saving will be calculated shortly.
+        </p>
+        <p>
+          For more information and to access your Eco Rewards account, go to <a href="https://www.ecorewards.org.uk">ecorewards.org.uk</a>.
+        </p>
+      </div>
+      <div class="modal-body form-error">
+        <p>There was an error processing your journey.</p>
+        <p class="modal-errors"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://github.com/mebjas/html5-qrcode/releases/download/V2.0.1/html5-qrcode.min.js"></script>
+<script defer>
+  window.addEventListener('DOMContentLoaded', function() {
+    $(document).ready(async () => {
+      // If you want to prefer back camera
+      const html5QrCode = new Html5Qrcode("reader", false);
+      const config = { fps: 1, qrbox: 250 };
+
+      async function onScanSuccess(qrCodeMessage) {
+        $("#deviceId").val(qrCodeMessage).change();
+        await html5QrCode.stop();
+        $("#reader").toggle();
+        $("#locationName").html(qrCodeMessage);
+      }
+
+      function onScanError(err) {}
+
+      $("#scan-qr").click(() => {
+        $("#scan-qr").toggle();
+        html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess, onScanError);
+      });
+    });
+    $(".travel-form").change(() => {
+      console.log($("#memberId").val(), $("#distance").val(), $("#mode").val(), $("#deviceId").val());
+      const enabled = $("#smartcard").val().length > 8 && $("#distance").val() && $("#mode").val() && $("#deviceId").val();
+      $(".travel-form button[type=submit]").prop("disabled", !enabled);
+    });
+    $("#dateNow").ready(() => {
+      const now = new Date();
+      $("#dateNow").val(now.toJSON().substr(0, 10));
+    })
+
+
+    //
+    // $(".qr-form").on("submit", e => {
+    //   e.preventDefault();
+    //
+    //   const submitButton = $(".qr-form button");
+    //   const title = $(".modal-title");
+    //   const formSuccess = $(".form-success");
+    //   const formErrors = $(".form-error");
+    //   const errors = $(formErrors, ".modal-errors");
+    //   const modalContainer = $("#reportJourneyModal");
+    //
+    //   submitButton.prop("disabled", true);
+    //   document.cookie = "memberId=" + $("#smartcard").val() + ";SameSite=Strict";
+    //
+    //   const url = atob(["aHR0cHM6", "Ly9hcGkuZWN", "vcmV3YXJkcy5", "jby51ay9qb3VybmV5"].join(""));
+    //
+    //   $.ajax({
+    //     url,
+    //     type: "POST",
+    //     data: new FormData($(".qr-form")[0]),
+    //     processData: false,
+    //     contentType: false,
+    //     success: (data, status) => {
+    //       formErrors.hide();
+    //       formSuccess.show();
+    //       title.text("Success");
+    //     },
+    //     error: (xhr, desc, err) => {
+    //       formErrors.show();
+    //       formSuccess.hide();
+    //       title.text("Error");
+    //       if (xhr.status === 400) {
+    //         errors.html(xhr.responseJSON.data.errors.map(e => e + "<br/>"));
+    //       }
+    //       else {
+    //         errors.text("Please enter your Eco Rewards ID or registered card number");
+    //       }
+    //     },
+    //     complete: () => {
+    //       submitButton.prop("disabled", false);
+    //       modalContainer.modal();
+    //     }
+    //   });
+    // });
+    //
+    // $(".qr-form").ready(() => {
+    //   const cookies = document.cookie.split(";").reduce((index, cookie) => {
+    //     const [key, value] = cookie.split("=");
+    //     index[key.trim()] = value;
+    //
+    //     return index;
+    //   }, {});
+    //
+    //   if (cookies["memberId"]) {
+    //     $("#smartcard").val(cookies["memberId"]);
+    //   }
+    // });
+
+  });
+</script>

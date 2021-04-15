@@ -2,7 +2,7 @@
 $(".travel-form").on("submit", e => {
   e.preventDefault();
 
-  const submitButton = $(".travel-form button");
+  const submitButton = $(".travel-form button[type=submit]");
   const title = $(".modal-title");
   const formSuccess = $(".form-success");
   const formErrors = $(".form-error");
@@ -57,7 +57,7 @@ $(".travel-form").ready(() => {
 });
 
 $("#confirm").change(() => {
-  $(".travel-form button").prop("disabled", !$("#confirm").prop("checked"));
+  $(".travel-form button[type=submit]").prop("disabled", !$("#confirm").prop("checked"));
 });
 
 $("#date").ready(() => {
