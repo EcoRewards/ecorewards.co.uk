@@ -71,6 +71,7 @@ layout: default
             <div style="width: 100%" id="reader"></div>
             <input type="hidden" id="deviceId" name="deviceId"/>
             <div style="margin-top: 6px" id="locationName"></div>
+            <div style="margin-top: 6px" id="coords"></div>
           </div>
         </div>
         <div class="form-group row">
@@ -156,10 +157,15 @@ layout: default
         }
       }
 
+      function getPosition(position) {
+        $("#coords").html(position.coords.latitude + ", " + position.coords.longitude);
+      }
+
       function onScanError(err) {}
 
       $("#scan-qr").click(() => {
         $("#scan-qr").toggle();
+        navigator.geolocation.getCurrentPosition(getPosition);
         html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess, onScanError);
       });
     });
