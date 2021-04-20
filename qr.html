@@ -142,8 +142,11 @@ layout: default
     });
     $("#dateNow").ready(() => {
       const now = new Date();
-      $("#dateNow").val(now.toJSON().substr(0, 10));
+      $("#dateNow").val(now.toJSON());
     })
 
+    $("button[data-dismiss=modal]").click(() => {
+      window.location.reload();
+    });
   });
 </script>
