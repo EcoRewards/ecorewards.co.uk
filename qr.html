@@ -30,48 +30,14 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
-          <label for="mode" class="col-sm-4 text-right col-form-label">Travel mode</label>
-          <div class="col-sm-6 pl-0">
-            <select class="form-control text-muted" id="mode" name="mode">
-              <option value="" selected="">Select green transport mode</option>
-              <option value="car share">Car share</option>
-              <option value="electric car">Electric car</option>
-              <option value="taxi">Taxi</option>
-              <option value="park and ride">Park and ride</option>
-              <option value="tram">Tram</option>
-              <option value="bus">Bus</option>
-              <option value="train">Train</option>
-              <option value="cycling">Cycling</option>
-              <option value="walk">Walk</option>
-              <option value="work from home">Work from home</option>
-              <option value="jogging">Jogging</option>
-              <option value="running">Running</option>
-              <option value="rowing">Rowing</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="mode" class="col-sm-4 text-right col-form-label">Distance (miles)</label>
-          <div class="col-sm-6 pl-0">
-            <input type="text"
-                   class="form-control"
-                   id="distance"
-                   name="distance"
-                   pattern="^[.0-9]*$"
-                   aria-describedby="distanceHelp"
-                   placeholder="Enter overall distance in miles eg 3.2"
-                   required
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="mode" class="col-sm-4 text-right col-form-label">Location</label>
+          <label for="deviceId" class="col-sm-4 text-right col-form-label">Location</label>
           <div class="col-sm-6 pl-0">
             <button type="button" id="scan-qr" class="btn btn-primary travel">SCAN QR CODE</button>
             <div style="width: 100%" id="reader"></div>
             <input type="hidden" id="deviceId" name="deviceId"/>
+            <input type="hidden" id="latitude" name="latitude"/>
+            <input type="hidden" id="longitude" name="longitude"/>
             <div style="margin-top: 6px" id="locationName"></div>
-            <div style="margin-top: 6px" id="coords"></div>
           </div>
         </div>
         <div class="form-group row">
@@ -158,7 +124,8 @@ layout: default
       }
 
       function getPosition(position) {
-        $("#coords").html(position.coords.latitude + ", " + position.coords.longitude);
+        $("#latitude").val(position.coords.latitude);
+        $("#longitude").val(position.coords.longitude);
       }
 
       function onScanError(err) {}
@@ -170,7 +137,7 @@ layout: default
       });
     });
     $(".travel-form").change(() => {
-      const enabled = $("#smartcard").val().length > 8 && $("#distance").val() && $("#mode").val() && $("#deviceId").val();
+      const enabled = $("#smartcard").val().length > 8 && $("#deviceId").val();
       $(".travel-form button[type=submit]").prop("disabled", !enabled);
     });
     $("#dateNow").ready(() => {
