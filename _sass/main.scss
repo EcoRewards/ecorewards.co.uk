@@ -191,3 +191,9 @@ a.btn-register, a.btn-register:hover, a.btn-register:visited, a.btn-register:act
     margin-bottom: 20px;
   }
 }
+
+.travel-form label {
+  @media ($screen-tablet) {
+    text-align: right;
+  }
+}
