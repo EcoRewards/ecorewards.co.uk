@@ -61,13 +61,18 @@ $("#confirm").change(() => {
 });
 
 $("#date").ready(() => {
+  setDate();
+  setInterval(setDate, 86400);
+})
+
+function setDate() {
   const now = new Date();
   const eightDaysAgo = new Date(now.getTime() - 604800000);
 
   $("#date")
-      .prop("min", eightDaysAgo.toJSON().substr(0, 10))
-      .prop("max", now.toJSON().substr(0, 10));
-})
+    .prop("min", eightDaysAgo.toJSON().substr(0, 10))
+    .prop("max", now.toJSON().substr(0, 10));
+}
 
 // Scroll
 function goToByScroll(id){
