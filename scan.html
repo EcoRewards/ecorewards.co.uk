@@ -148,10 +148,13 @@ layout: default
       }
     });
 
-    $(".travel-form").change(() => {
+    function checkIfCanSubmit() {
       const enabled = $("#smartcard").val().length > 8 && $("#deviceId").val();
       $(".travel-form button[type=submit]").prop("disabled", !enabled);
-    });
+    }
+
+    $("#smartcard").keydown(checkIfCanSubmit);
+    $("#smartcard").ready(checkIfCanSubmit);
 
     $("#dateNow").ready(() => {
       const now = new Date();
