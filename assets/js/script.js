@@ -10,7 +10,7 @@ $(".travel-form").on("submit", e => {
   const modalContainer = $("#reportJourneyModal");
 
   submitButton.prop("disabled", true);
-  document.cookie = "memberId=" + $("#smartcard").val() + ";SameSite=Strict";
+  document.cookie = "memberId=" + $("#smartcard").val() + ";SameSite=Strict; max-age=31536000; path=/;";
 
   const url = atob(["aHR0cHM6", "Ly9hcGkuZWN", "vcmV3YXJkcy5", "jby51ay9qb3VybmV5"].join(""));
 
