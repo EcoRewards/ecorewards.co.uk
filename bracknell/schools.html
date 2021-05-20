@@ -33,7 +33,21 @@ anchorLinks: true
 
     <div class="row justify-content-md-center">
       <div class="col-md-8">
-        <canvas id="myChart" width="400" height="240"></canvas>
+        <div class="row">
+          <div class="col text-center">
+              <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Rewards
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="chartToggle" value="#carbonSavingChart" autocomplete="off"> Carbon Saving
+                </label>
+              </div>
+          </div>
+        </div>
+
+        <canvas id="rewardChart" width="400" height="240"></canvas>
+        <canvas style="display: none" id="carbonSavingChart" width="400" height="240"></canvas>
         <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Member ID:</label>
@@ -47,7 +61,8 @@ anchorLinks: true
             <option value="/organisation/2">Easthampstead Park CS</option>
             <option value="/organisation/3">Garth Hill College</option>
             <option value="/organisation/12">Warfield Primary</option>
-            <option value="/organisation/15">Kings Academy</option>
+            <option value="/organisation/15">Kings Academy Secondary</option>
+            <option value="/organisation/16">Kings Academy Primary</option>
             <option value="/organisation/14">Harmans Water Primary</option>
             <option value="/organisation/13">St Michaels Primary</option>
           </select>
@@ -96,6 +111,11 @@ anchorLinks: true
       }
     });
 
+    $("input[name=chartToggle]").click(function() {
+      $("canvas").css({ display: "none"});
+      $($(this).val()).css({ display: "block" });
+    });
+
     function toggleButton() {
       $("#submit").attr("disabled", $("#memberGroup").val() == null || $("#memberGroup").val().length < 1 || $("#memberId").val().length < 10);
     }
@@ -122,41 +142,46 @@ anchorLinks: true
       });
     });
 
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const colours = ["#4e73df", "#1cc88a", "#f6c23e", "#36b9cc",  "#e74a3b", "#858796"];
-    const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary"]
-    let colourI = 0;
     $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
-      const datasets = response.data.reduce((index, col) => {
-        if (schools.includes(col.name)) {
-          index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % colours.length] };
-          index[col.name].data.push(col.totalRewardsEarned);
-        }
+      const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary"]
 
-        return index;
-      }, {});
-      const labels = response.data.reduce((index, col) => {
-        index[col.date] = true;
-        return index;
-      }, {});
-      const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(labels),
-          datasets: Object.values(datasets)
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
-        }
-      });
+      createGraph("rewardChart", "totalRewardsEarned", schools, response);
+      createGraph("carbonSavingChart", "totalCarbonSaving", schools, response);
     });
   });
+
+  function createGraph(id, field, schools, response) {
+    const ctx = document.getElementById(id).getContext("2d");
+    let colourI = 0;
+    const colours = ["#4e73df", "#1cc88a", "#f6c23e", "#36b9cc",  "#e74a3b", "#858796"];
+    const datasets = response.data.reduce((index, col) => {
+      if (schools.includes(col.name)) {
+        index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % colours.length] };
+        index[col.name].data.push(col[field]);
+      }
+
+      return index;
+    }, {});
+    const labels = response.data.reduce((index, col) => {
+      index[col.date] = true;
+      return index;
+    }, {});
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(labels),
+        datasets: Object.values(datasets)
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
 
 </script>
