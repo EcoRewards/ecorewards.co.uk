@@ -37,10 +37,13 @@ anchorLinks: true
           <div class="col text-center">
               <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
                 <label class="btn btn-secondary active">
-                  <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Rewards
+                  <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Points
                 </label>
                 <label class="btn btn-secondary">
                   <input type="radio" name="chartToggle" value="#carbonSavingChart" autocomplete="off"> Carbon Saving
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="chartToggle" value="#milesChart" autocomplete="off"> Green Miles
                 </label>
               </div>
           </div>
@@ -48,6 +51,7 @@ anchorLinks: true
 
         <canvas id="rewardChart" width="400" height="240"></canvas>
         <canvas style="display: none" id="carbonSavingChart" width="400" height="240"></canvas>
+        <canvas style="display: none" id="milesChart" width="400" height="240"></canvas>
         <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Member ID:</label>
@@ -147,6 +151,7 @@ anchorLinks: true
 
       createGraph("rewardChart", "totalRewardsEarned", schools, response);
       createGraph("carbonSavingChart", "totalCarbonSaving", schools, response);
+      createGraph("milesChart", "totalDistance", schools, response);
     });
   });
 
