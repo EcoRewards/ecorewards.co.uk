@@ -92,7 +92,8 @@ function toggleMenu() {
 }
 
 // Click nav toggle
-$(".js-nav-toggle").click(function() {
+$(".js-nav-toggle").click(function(e) {
+  e.stopImmediatePropagation();
   toggleMenu();
 });
 
