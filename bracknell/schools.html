@@ -29,15 +29,16 @@ anchorLinks: true
           <div class="text-center">Warfield Primary</div>
         </div>
       </div>
-    </div>
 
-    <div class="row justify-content-md-center">
       <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
         <div class="card-body">
           <div class="post-image" style="background: url(/assets/image/orgs/st-michaels.png) center no-repeat; background-size: 80px"></div>
           <div class="text-center">St Michaels Primary</div>
         </div>
       </div>
+    </div>
+
+    <div class="row justify-content-md-center">
 
       <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
         <div class="card-body">
@@ -52,6 +53,21 @@ anchorLinks: true
           <div class="text-center">Harmans Water Primary</div>
         </div>
       </div>
+
+      <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
+        <div class="card-body">
+          <div class="post-image" style="background: url(/assets/image/orgs/ranelagh.png) center no-repeat; background-size: 80px"></div>
+          <div class="text-center">Ranelagh School</div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
+        <div class="card-body">
+          <div class="post-image" style="background: url(/assets/image/orgs/st-josephs.png) center no-repeat; background-size: 80px"></div>
+          <div class="text-center">St Josephs Primary</div>
+        </div>
+      </div>
+
     </div>
 
     <div class="row justify-content-md-center">
@@ -92,6 +108,8 @@ anchorLinks: true
             <option value="/organisation/16">Kings Academy Primary</option>
             <option value="/organisation/14">Harmans Water Primary</option>
             <option value="/organisation/13">St Michaels Primary</option>
+            <option value="/organisation/19">Ranelagh School</option>
+            <option value="/organisation/17">St Josephs Primary</option>
           </select>
         </div>
 
@@ -170,7 +188,7 @@ anchorLinks: true
     });
 
     $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
-      const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary"]
+      const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
 
       createGraph("rewardChart", "totalRewardsEarned", schools, response);
       createGraph("carbonSavingChart", "totalCarbonSaving", schools, response);
