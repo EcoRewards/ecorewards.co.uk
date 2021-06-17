@@ -96,16 +96,17 @@ anchorLinks: true
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>School</th>
-              <th>Points</th>
-              <th>Carbon Saving</th>
-              <th>Green Miles</th>
+              <th>Participating Schools</th>
+              <th class="text-right">Points</th>
+              <th class="text-right">Carbon Saving</th>
+              <th class="text-right">Green Miles</th>
             </tr>
             </thead>
             <tbody id="dataTable">
 
             </tbody>
           </table>
+          <p>Totals for each school since 1st June 2021</p>
         </div>
 
 
@@ -205,13 +206,18 @@ anchorLinks: true
       });
     });
 
-    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
-      const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
+    const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
+    const date = new Date();
+    date.setDate(1);
 
+    $.get("https://api.ecorewards.co.uk/scheme/6/report?from=" + date.toJSON().substr(0, date.toJSON().indexOf("T")), response => {
+      createTable(schools, response);
+    });
+
+    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
       createGraph("rewardChart", "totalRewardsEarned", schools, response);
       createGraph("carbonSavingChart", "totalCarbonSaving", schools, response);
       createGraph("milesChart", "totalDistance", schools, response);
-      createTable(schools, response);
     });
   });
 
@@ -264,9 +270,9 @@ anchorLinks: true
       .filter(school => schoolData[school])
       .map(school => `
         <td>${school}</td>
-        <td>${schoolData[school].totalRewardsEarned}</td>
-        <td>${schoolData[school].totalCarbonSaving.toFixed(2)}kg</td>
-        <td>${schoolData[school].totalDistance.toFixed(2)} miles</td>
+        <td class="text-right">${schoolData[school].totalRewardsEarned}</td>
+        <td class="text-right">${schoolData[school].totalCarbonSaving.toFixed(2)}kg</td>
+        <td class="text-right">${schoolData[school].totalDistance.toFixed(2)} miles</td>
       `)
       .reduce((r, row) => r + `<tr>${row}</tr>`, "");
 
