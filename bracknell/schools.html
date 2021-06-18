@@ -74,23 +74,42 @@ anchorLinks: true
       <div class="col-md-8">
         <div class="row">
           <div class="col text-center">
-              <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                  <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Points
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" name="chartToggle" value="#carbonSavingChart" autocomplete="off"> Carbon Saving
-                </label>
-                <label class="btn btn-secondary">
-                  <input type="radio" name="chartToggle" value="#milesChart" autocomplete="off"> Green Miles
-                </label>
-              </div>
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Points
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="chartToggle" value="#carbonSavingChart" autocomplete="off"> Carbon Saving
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="chartToggle" value="#milesChart" autocomplete="off"> Green Miles
+              </label>
+            </div>
           </div>
         </div>
 
         <canvas id="rewardChart" width="400" height="240"></canvas>
         <canvas style="display: none" id="carbonSavingChart" width="400" height="240"></canvas>
         <canvas style="display: none" id="milesChart" width="400" height="240"></canvas>
+
+        <div class="row mt-5">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Participating Schools</th>
+              <th class="text-right">Points</th>
+              <th class="text-right">Carbon Saving</th>
+              <th class="text-right">Green Miles</th>
+            </tr>
+            </thead>
+            <tbody id="dataTable">
+
+            </tbody>
+          </table>
+          <p class="tableStartDate">Totals for each school since 1st June 2021</p>
+        </div>
+
+
         <h2 class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Member ID:</label>
@@ -187,9 +206,45 @@ anchorLinks: true
       });
     });
 
-    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
-      const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
+    const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
+    const date = new Date();
 
+    // 1st Aug, 1st Nov, 1st Jan, 1st March, 1st April, 1st June
+    const monthMap = {
+      0: 0,
+      1: 0,
+      2: 2,
+      3: 3,
+      4: 3,
+      5: 5,
+      6: 5,
+      7: 7,
+      8: 7,
+      9: 7,
+      10: 10,
+      11: 10
+    };
+
+    date.setMonth(monthMap[date.getMonth()]);
+    date.setDate(1);
+
+    $.get("https://api.ecorewards.co.uk/scheme/6/report?from=" + date.toJSON().substr(0, date.toJSON().indexOf("T")), response => {
+      createTable(schools, response);
+      const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
+      const nth = function(d) {
+        if (d > 3 && d < 21) return 'th';
+        switch (d % 10) {
+          case 1:  return "st";
+          case 2:  return "nd";
+          case 3:  return "rd";
+          default: return "th";
+        }
+      }
+
+      $(".tableStartDate").html(`Totals for each school since ${date.getDate()}${nth(date.getDate())} ${month} ${date.getFullYear()}`);
+    });
+
+    $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
       createGraph("rewardChart", "totalRewardsEarned", schools, response);
       createGraph("carbonSavingChart", "totalCarbonSaving", schools, response);
       createGraph("milesChart", "totalDistance", schools, response);
@@ -228,6 +283,30 @@ anchorLinks: true
         }
       }
     });
+  }
+
+  function createTable(schools, response) {
+    const schoolData = response.data.reduce((index, col) => {
+      index[col.name] = index[col.name] || { totalRewardsEarned: 0, totalCarbonSaving: 0, totalDistance: 0 };
+      index[col.name].totalRewardsEarned += col.totalRewardsEarned;
+      index[col.name].totalCarbonSaving += col.totalCarbonSaving;
+      index[col.name].totalDistance += col.totalDistance;
+
+      return index;
+    }, {});
+
+    const html = schools
+      .sort((a, b) => a.replace("St ", "") > b.replace("St ", ""))
+      .filter(school => schoolData[school])
+      .map(school => `
+        <td>${school}</td>
+        <td class="text-right">${schoolData[school].totalRewardsEarned}</td>
+        <td class="text-right">${schoolData[school].totalCarbonSaving.toFixed(2)}kg</td>
+        <td class="text-right">${schoolData[school].totalDistance.toFixed(2)} miles</td>
+      `)
+      .reduce((r, row) => r + `<tr>${row}</tr>`, "");
+
+    $("#dataTable").html(html);
   }
 
 </script>
