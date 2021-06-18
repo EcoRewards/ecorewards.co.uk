@@ -106,7 +106,7 @@ anchorLinks: true
 
             </tbody>
           </table>
-          <p>Totals for each school since 1st June 2021</p>
+          <p class="tableStartDate">Totals for each school since 1st June 2021</p>
         </div>
 
 
@@ -208,10 +208,25 @@ anchorLinks: true
 
     const schools = ["Easthampstead Park CS", "Garth Hill College", "Warfield Primary", "St Michaels Primary", "Kings Academy Secondary", "Kings Academy Primary", "Harmans Water Primary", "Ranelagh School", "St Josephs Primary"]
     const date = new Date();
+    const month = date.getMonth();
+    const offset = month % 3;
+    date.setMonth(date.getMonth() - offset);
     date.setDate(1);
 
     $.get("https://api.ecorewards.co.uk/scheme/6/report?from=" + date.toJSON().substr(0, date.toJSON().indexOf("T")), response => {
       createTable(schools, response);
+      const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
+      const nth = function(d) {
+        if (d > 3 && d < 21) return 'th';
+        switch (d % 10) {
+          case 1:  return "st";
+          case 2:  return "nd";
+          case 3:  return "rd";
+          default: return "th";
+        }
+      }
+
+      $(".tableStartDate").html(`Totals for each school since ${date.getDate()}${nth(date.getDate())} ${month} ${date.getFullYear()}`);
     });
 
     $.get("https://api.ecorewards.co.uk/scheme/6/report" , response => {
