@@ -42,8 +42,14 @@
         <li class="nav__item">
             <a class="nav__link" href="{{ site.baseurl }}/bracknell">Bracknell</a>
         </li>
+        {% if page.registrationLink %}
+        <li class="nav__item">
+            <a class="nav__link" href="{{ page.registrationLink }}">Register</a>
+        </li>
+        {% else %}
         <li class="nav__item">
             <a class="nav__link" href="https://www.ecorewards.org.uk/secure/register.php">Register</a>
         </li>
+        {% endif %}
     </ul>
 </nav>
