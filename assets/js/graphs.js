@@ -60,7 +60,7 @@ function setupGraphs(organisations, schemeId) {
       }
     }
 
-    $(".tableStartDate").html(`Totals for each school since ${date.getDate()}${nth(date.getDate())} ${month} ${date.getFullYear()}`);
+    $(".tableStartDate").html(`Totals since ${date.getDate()}${nth(date.getDate())} ${month} ${date.getFullYear()}`);
   });
 
   $.get(`https://api.ecorewards.co.uk/scheme/${schemeId}/report` , response => {
