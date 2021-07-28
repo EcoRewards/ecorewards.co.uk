@@ -4,8 +4,15 @@
       <a href="{{ site.baseurl }}/" class="navbar-brand d-flex align-items-center">
         <img width="240px" alt="eco rewards logo" src="{{ site.baseurl }}/assets/image/eco-rewards-logo3.png" />
         <span class="sr-only">Home</span>
+        {% if page.headerImage %}
+          <img height="80px" alt="eco rewards logo" src="{{ page.headerImage }}" />
+        {% endif %}
       </a>
-      {% include nav.html %}
+      {% if page.bracknell %}
+        {% include bracknell-nav.html %}
+      {% else %}
+        {% include nav.html %}
+      {% endif %}
     </div>
   </div>
 </header>
