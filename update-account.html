@@ -11,6 +11,8 @@ layout: default
   <div class="container vertical-fill">
     <div class="row justify-content-md-center">
       <div class="col-md-8">
+        <p>Please use this form to request update to your Eco Rewards account.</p>
+        <p> Enter your email address and your tag/card number.</p>
         <form id="updateForm" action="https://formspree.io/f/mjvpnvwo" method="POST" _lpchecked="1">
           <div class="row">
             <div class="col-lg-3 mx-auto my-2">
@@ -34,6 +36,7 @@ layout: default
             </div>
             <div class="col-lg-9 mx-auto my-2">
               <select class="form-control" id="enquiry-input" name="enquiry">
+                <option></option>
                 <option>Change tag</option>
                 <option>Change school/organisation</option>
                 <option>Change default journey</option>
@@ -42,7 +45,7 @@ layout: default
           </div>
           <div class="row hidden">
             <div class="col-lg-3 mx-auto my-2">
-              <label for="update-input">Details</label>
+              <label for="update-input"></label>
             </div>
             <div class="col-lg-9 mx-auto my-2">
               <textarea class="form-control" id="update-input" type="text" name="update"></textarea>
@@ -60,3 +63,17 @@ layout: default
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script>
+  $("#enquiry-input").change(e => {
+    const selected = $(e.target).val();
+
+    if (selected === "Change tag") {
+      $("label[for=update-input]").html("Enter replacement tag/card number");
+    } else if (selected === "Change default journey") {
+      $("label[for=update-input]").html("Enter return distance to work/school and mode of travel");
+    } else if (selected === "Change school/organisation") {
+      $("label[for=update-input]").html("Enter school or organisation");
+    }
+  });
+</script>
