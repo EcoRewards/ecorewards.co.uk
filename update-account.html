@@ -12,7 +12,7 @@ layout: default
     <div class="row justify-content-md-center">
       <div class="col-md-8">
         <p>Please use this form to request update to your Eco Rewards account.</p>
-        <p> Enter your email address and your tag/card number.</p>
+        <p>Enter your email address and your tag/card number.</p>
         <form id="updateForm" action="https://formspree.io/f/mjvpnvwo" method="POST" _lpchecked="1">
           <div class="row">
             <div class="col-lg-3 mx-auto my-2">
@@ -48,7 +48,9 @@ layout: default
               <label for="update-input"></label>
             </div>
             <div class="col-lg-9 mx-auto my-2">
-              <textarea class="form-control" id="update-input" type="text" name="update"></textarea>
+              <textarea style="display: none" class="form-control" id="update-input" type="text" name="update"></textarea>
+              <select style="display: none" class="form-control" id="organisation-input" name="organisation"></select>
+              <select style="display: none" class="form-control mt-3" id="group-input" name="group"></select>
             </div>
           </div>
           <div class="row">
@@ -70,10 +72,63 @@ layout: default
 
     if (selected === "Change tag") {
       $("label[for=update-input]").html("Enter replacement tag/card number");
+
+      $("#organisation-input").hide();
+      $("#group-input").hide();
+      $("#update-input").show();
     } else if (selected === "Change default journey") {
       $("label[for=update-input]").html("Enter return distance to work/school and mode of travel");
+
+      $("#organisation-input").hide();
+      $("#group-input").hide();
+      $("#update-input").show();
     } else if (selected === "Change school/organisation") {
       $("label[for=update-input]").html("Enter school or organisation");
+
+      $("#update-input").hide();
+
+      $.get("https://api.ecorewards.co.uk/groups", response => {
+
+        const organisations = Object
+          .keys(response.links)
+          .filter(k => k.startsWith("/organisation/") && response.links[k].scheme === "/scheme/6")
+          .map(k => response.links[k])
+          .map(org => `<option data-org-id="${org.id}">${org.name}</option>`)
+          .join("\n");
+
+        $("#organisation-input")
+          .html("<option>Please select</option>\n" + organisations)
+          .show()
+          .change(e => {
+            const selectedOrg = $(e.target).find(':selected').data("org-id");
+            const groups = response.data
+              .filter(group => group.organisation === selectedOrg)
+              .map(group => `<option>${group.name}</option>`)
+              .join("\n");
+
+            $("#group-input")
+              .html("<option>Please select</option>\n" + groups)
+              .toggle(selectedOrg !== "");
+          });
+      });
     }
+  });
+
+  $("form").submit(e => {
+    e.preventDefault();
+    const data = $("form")
+      .serializeArray()
+      .reduce((acc, item) => {
+        acc[item.name] = item.value;
+        return acc;
+      }, {});
+
+    $.ajax({
+      url: $("form").attr("action"),
+      method: "POST",
+      dataType: "json",
+      data: data,
+      success: () => window.location.href = "/thank-you"
+    });
   });
 </script>
