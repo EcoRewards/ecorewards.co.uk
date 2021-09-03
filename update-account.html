@@ -123,6 +123,11 @@ layout: default
         return acc;
       }, {});
 
+    if ((!data.group || data.group === "Please select") && !data.update) {
+      alert("Please complete the form");
+      return;
+    }
+
     $.ajax({
       url: $("form").attr("action"),
       method: "POST",
