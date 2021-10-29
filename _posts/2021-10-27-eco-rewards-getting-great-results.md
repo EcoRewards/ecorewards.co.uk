@@ -7,7 +7,7 @@ description: >-
   winning scheme addressing climate change, is currently achieving 
 layout: blog
 navigation: false
-image: /increase-in-green-travel-in-bracknell/unnamed-small.png
+image: /eco-rewards-getting-great-results/milestone-thumb.png
 ---
 
 ![reader](/assets/image/post/eco-rewards-getting-great-results/milestone.png){: .img-responsive .mr-4 .mb-3 }
