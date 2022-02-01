@@ -1,0 +1,80 @@
+---
+title: Eco Rewards - MP TRavel
+description: Earn reward points for making greener travel choices
+layout: default
+bracknell: false
+---
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+
+        <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
+        <div class="row form-group">
+          <label for="cardNumber" class="col-sm-4 text-right col-form-label">Card number</label>
+          <div class="input-group col-sm-6 pl-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text">015701</span>
+            </div>
+            <input type="text"
+                   class="form-control col-sm-6"
+                   id="cardNumber"
+                   name="cardNumber"
+                   pattern="^[0-9]*$"
+                   minLength="10"
+                   maxLength="10"
+                   placeholder="e.g. 1020304050"
+                   required
+            />
+          </div>
+        </div>
+
+        <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
+
+      </div>
+      <div class="col-md-8">
+        <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
+        <p>
+          <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
+          <a class="btn-primary btn" style="color: white;" href="https://www.ecorewards.org.uk/">Eco Rewards Website</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include modal.html %}
+{% include footer.html %}
+<script type="application/javascript">
+
+  window.addEventListener('DOMContentLoaded', () => {
+    $("#cardNumber").on("keyup", () => {
+      $("#submit").attr("disabled", $("#cardNumber").val().length !== 10);
+    });
+
+    $("#submit").on("click", () => {
+      const data = {
+        smartcard: "015701" + $("#cardNumber").val(),
+        group: "/group/121",
+        defaultTransportMode: "walk",
+        defaultDistance: 3.1
+      };
+
+      $.ajax({
+        url: "https://api.ecorewards.co.uk/member",
+        type: "POST",
+        data: data,
+        success: response => {
+          window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + response.data.id.substr(response.data.id.lastIndexOf("/") + 1);
+        },
+        error: () => {
+          alert('Invalid member ID');
+        }
+      });
+    });
+
+  });
+
+</script>
