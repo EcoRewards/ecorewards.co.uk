@@ -2,7 +2,7 @@
 title: Eco Rewards - MP TRavel
 description: Earn reward points for making greener travel choices
 layout: default
-bracknell: false
+mpTravel: true
 ---
 
 <div class="album py-5 bg-light">
@@ -37,7 +37,7 @@ bracknell: false
       <div class="col-md-8">
         <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
         <p>
-          <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
+          <a class="btn-primary btn" style="color: white;" href="/mp-travel/selfreport">Self Reporting</a>
           <a class="btn-primary btn" style="color: white;" href="https://www.ecorewards.org.uk/">Eco Rewards Website</a>
         </p>
       </div>
@@ -58,8 +58,8 @@ bracknell: false
       const data = {
         smartcard: "015701" + $("#cardNumber").val(),
         group: "/group/121",
-        defaultTransportMode: "walk",
-        defaultDistance: 3.1
+        defaultTransportMode: "bus",
+        defaultDistance: 5.1
       };
 
       $.ajax({
