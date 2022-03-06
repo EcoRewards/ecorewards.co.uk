@@ -3,7 +3,7 @@
 function setupGraphs(organisations, schemeId) {
   $("#organisation").change(function() {
     const val = $(this).val();
-    $("#memberGroup").html('');
+    $("#memberGroup").html('<option value="">Please select</option>');
     if (val.startsWith("/organisation/")) {
       $.get("https://api.ecorewards.co.uk/groups", response => {
         response.data
