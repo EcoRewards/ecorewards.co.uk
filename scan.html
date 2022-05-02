@@ -100,59 +100,16 @@ layout: default
 <script src="https://github.com/mebjas/html5-qrcode/releases/download/V2.0.1/html5-qrcode.min.js"></script>
 <script defer>
   window.addEventListener('DOMContentLoaded', function() {
-    const locations = {
-      "100110014": "Bracknell Bus Station",
-      "100110022": "Quelm Lane",
-      "100110030": "High St Crossing - St Michael's",
-      "100110048": "Church Rd Junction Sandhurst",
-      "100110055": "High St nr Toyota",
-      "100110063": "ER6 vandalised",
-      "100110071": "GtH Footbridge over 3095",
-      "100110089": "EP Subway under 3095",
-      "100110097": "6 Knobs EP",
-      "100110105": "Dipper Lea EP",
-      "100110113": "Eco Rewards BID Trail A",
-      "100110121": "Eco Rewards BID Trail B",
-      "100110139": "Eco Rewards BID Trail C",
-      "100110147": "Eco Rewards BID Trail D",
-      "100110154": "Eco Rewards BID Trail E",
-      "100110162": "Eco Rewards BID Trail F",
-      "100110170": "Rail footbridge Sandhurst 2",
-      "100110188": "Bracknell Station Bridge",
-      "100110196": "Eco Rewards 19",
-      "100110204": "Eco Rewards 20",
-      "100110212": "Warfield All Saints PA",
-      "100110220": "Harvest Ride crossing",
-      "100110238": "Folders Lane",
-      "100110246": "Braybrooke",
-      "100110253": "Quelm Lane",
-      "100110261": "Warfield Primary Woodhurst",
-      "100110279": "H-Water Ripplesmere ",
-      "100110287": "H-Water Wellington",
-      "100110295": "H-Water Swimming Pool",
-      "100110303": "H-Water Shops",
-      "100110311": "Met Office Subway",
-      "100110329": "Church Rd Bracknell",
-      "100110337": "Bracknell Rail Station",
-      "100110345": "Bracknell Bus Station",
-      "100110352": "Western Rd Subway",
-      "100110360": "Millenium Way FPath",
-      "100110378": "Larges La Bridge",
-      "100110386": "Gipsy Lane",
-      "100110394": "Larges Lane",
-      "100110402": "Eco Rewards 40",
-      "100110410": "Wood Lane (King's)",
-      "100110428": "Ringmead Bus Stop EPCS",
-      "100110436": "Jennet's Park",
-      "100110444": "Ringmead subway EP",
-      "100110451": "Eco Rewards 45",
-      "100110469": "Eco Rewards 46",
-      "100110477": "Eco Rewards 47",
-      "100110485": "Eco Rewards 48",
-      "100110493": "Eco Rewards 49",
-      "100110501": "Eco Rewards 50"
-    };
+
     $(document).ready(async () => {
+      const response = await $.get("https://api.ecorewards.co.uk/locations");
+
+      const locations = response.data.reduce((index, location) => {
+        index[location.id.substring(location.id.lastIndexOf("/") + 1)] = location.name;
+
+        return index;
+      });
+
       // If you want to prefer back camera
       const html5QrCode = new Html5Qrcode("reader", false);
       const config = { fps: 1, qrbox: 250 };

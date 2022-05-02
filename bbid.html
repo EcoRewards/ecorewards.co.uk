@@ -100,16 +100,16 @@ layout: default
 
 <script src="https://github.com/mebjas/html5-qrcode/releases/download/V2.0.1/html5-qrcode.min.js"></script>
 <script defer>
-  window.addEventListener('DOMContentLoaded', function() {
-    const locations = {
-      "100110113": "Eco Rewards BID Trail A",
-      "100110121": "Eco Rewards BID Trail B",
-      "100110139": "Eco Rewards BID Trail C",
-      "100110147": "Eco Rewards BID Trail D",
-      "100110154": "Eco Rewards BID Trail E",
-      "100110162": "Eco Rewards BID Trail F"
-    };
+  window.addEventListener('DOMContentLoaded', async function() {
     $(document).ready(async () => {
+      const response = await $.get("https://api.ecorewards.co.uk/locations");
+
+      const locations = response.data.reduce((index, location) => {
+        index[location.id.substring(location.id.lastIndexOf("/") + 1)] = location.name;
+
+        return index;
+      });
+
       // If you want to prefer back camera
       const html5QrCode = new Html5Qrcode("reader", false);
       const config = { fps: 1, qrbox: 250 };
