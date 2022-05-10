@@ -23,7 +23,7 @@ function setupGraphs(organisations, schemeId) {
     $("#submit").attr("disabled", $("#memberGroup").val() == null || $("#memberGroup").val().length < 1 || $("#memberId").val().length < 10);
   }
 
-  $("#memberId").change(toggleButton);
+  $("#memberId").keypress(toggleButton);
   $("#memberGroup").change(toggleButton);
 
   const date = new Date();
