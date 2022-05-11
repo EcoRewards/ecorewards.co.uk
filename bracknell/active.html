@@ -8,7 +8,14 @@ bracknell: true
 <div class="album py-5 bg-light">
   <div class="container">
     <div class="row justify-content-md-center">
-      <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Active</h2>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
+            <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Active</h2>
+            <p>Go to <a href="#register">registration</a>.</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-md-8">
@@ -101,17 +108,24 @@ bracknell: true
 
     $("#submit").on("click", () => {
       const memberId = $("#memberId").val();
-      const data = {
+      const orgId = $("#organisation").val();
+
+      if (orgId === "/organisation/5" && !memberId.startsWith("633597")) {
+        alert("SWR cards start with 633597");
+        return;
+      }
+
+      const createAccount = memberId.length >= 16;
+      const data = createAccount ? {
         group: $("#memberGroup").val(),
         defaultTransportMode: "walk",
         defaultDistance: 3.1,
         memberId: memberId
-      };
+      } : { group: $("#memberGroup").val() };
+      const url = createAccount ? "https://api.ecorewards.co.uk/member" : "https://api.ecorewards.co.uk/member/" + memberId;
+      const type = createAccount ? "POST" : "PATCH";
 
-      $.ajax({
-        url: "https://api.ecorewards.co.uk/member",
-        type: "POST",
-        data: data,
+      $.ajax({ url, type, data,
         success: () => {
           window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId;
         },

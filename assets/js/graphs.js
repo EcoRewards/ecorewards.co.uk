@@ -20,7 +20,9 @@ function setupGraphs(organisations, schemeId) {
   });
 
   function toggleButton() {
-    $("#submit").attr("disabled", $("#memberGroup").val() == null || $("#memberGroup").val().length < 1 || $("#memberId").val().length < 10);
+    const memberIdLength = $("#memberId").val().length;
+    const memberIdValid = memberIdLength === 10 || memberIdLength === 16 || memberIdLength === 18;
+    $("#submit").attr("disabled", $("#memberGroup").val() == null || $("#memberGroup").val().length < 1 || !memberIdValid);
   }
 
   $("#memberId").keypress(toggleButton);
