@@ -8,38 +8,10 @@ bracknell: true
 
 {% include bracknell-jumbotron.html %}
 
-<!--<section class="pt-5 pb-0 bg-light">-->
-<!--  <div class="container">-->
-<!--    <div class="row justify-content-md-center">-->
-<!--      <p class="mb-3 lead">-->
-<!--        <a href="/orgs/epcs">-->
-<!--          <img src="/assets/image/orgs/epcs-rev.png" class="left" width="50px">-->
-<!--          Easthampstead Park CS-->
-<!--        </a>-->
-<!--      </p>-->
-<!--      <p class="mb-3 lead">-->
-<!--        <a href="/orgs/epcs">-->
-<!--          <img src="/assets/image/orgs/ghc.png" class="left" width="50px">-->
-<!--          Garth Hill Collage-->
-<!--        </a>-->
-<!--      </p>-->
-<!--    </div>-->
-
-<!--    <div class="row justify-content-md-center">-->
-<!--      <p class="mb-3 lead">If you have an e+ card, touch on a blue reader then</p>-->
-<!--      <p class="mb-5"><a class="btn btn-primary btn-register" href="https://www.ecorewards.org.uk/secure/register.php">REGISTER</a></p>-->
-<!--      <p class="mb-3 lead">If you have an Eco Rewards smart tag then</p>-->
-<!--      <p class="mb-0"><a class="btn btn-primary btn-register" href="https://www.ecorewards.org.uk/secure/register.php">REGISTER</a></p>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-
 <section id="news" class="pt-5 pb-5 bg-light">
   <div class="container">
     <div class="row justify-content-md-center text-center">
       <div class="col-md-8">
-        <h2 id="register" class="heading heading--md heading--color-1 mb-5">Register</h2>
-
         <div class="card shadow-sm mt-3 text-left">
           <div class="card-link" onclick="window.open('{{ site.baseurl }}/bracknell/schools')">
             <div class="row card-body news-body">
@@ -51,7 +23,7 @@ bracknell: true
                   BRACKNELL SCHOOLS
                 </h4>
                 <p class="mt-3 mb-3 mr-4">
-                  If you’re member of participating school community follow <a href="{{ site.baseurl }}/bracknell/schools">this link to register</a>.
+                  Members of participating schools follow <a href="{{ site.baseurl }}/bracknell/schools">this link</a>.
                 </p>
               </div>
             </div>
@@ -59,7 +31,44 @@ bracknell: true
         </div>
 
         <div class="card shadow-sm mt-3 text-left">
-          <div class="card-link" onclick="window.open('https://www.ecorewards.org.uk/secure/register.php')">
+          <div class="card-link" onclick="window.open('{{ site.baseurl }}/bracknell/active')">
+            <div class="row card-body news-body">
+              <div class="col-sm-3">
+                <div class="post-image" style="background: url(/assets/image/orgs/active.jpg) center no-repeat; background-size: 220px"></div>
+              </div>
+              <div class="col-sm-8 pt-3">
+                <h4 class="invert-header m-0 p-0">
+                  HEALTH/GP
+                </h4>
+                <p class="mt-3 mb-3 mr-4">
+                  Referrals with a Member ID follow <a href="{{ site.baseurl }}/bracknell/active">this link</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card shadow-sm mt-3 text-left">
+          <div class="card-link" onclick="window.open('{{ site.baseurl }}/bracknell/active')">
+            <div class="row card-body news-body">
+              <div class="col-sm-3">
+                <div class="post-image" style="background: url(/assets/image/post/green-travel-rewards-in-bracknell/reader.jpg) center no-repeat; background-size: 200px"></div>
+              </div>
+              <div class="col-sm-8 pt-3">
+                <h4 class="invert-header m-0 p-0">
+                  RESIDENTS
+                </h4>
+                <p class="mt-3 mb-3 mr-4">
+                  With Smart Tag follow <a href="{{ site.baseurl }}/bracknell/active">this link</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mt-3 text-left">
+          <div class="card-link" onclick="window.open('{{ site.baseurl }}/bracknell/active')">
             <div class="row card-body news-body">
               <div class="col-sm-3">
                 <div class="post-image" style="background: url(/assets/image/tags.jpg) center no-repeat; background-size: 210px"></div>
@@ -69,32 +78,15 @@ bracknell: true
                   <span style="text-transform: lowercase">e+</span> OR SWR CARDHOLDER
                 </h4>
                 <p class="mt-3 mb-3 mr-4">
-                  If you have an e+ or SWR smart card, touch on a blue reader <b>FIRST</b> then <a target="_blank" href="https://www.ecorewards.org.uk/secure/register.php">register</a> to get started.
+                  Follow <a href="{{ site.baseurl }}/bracknell/active">this link</a>
                 </p>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="card shadow-sm mt-3 text-left">
-          <div class="card-link" onclick="window.open('https://www.ecorewards.org.uk/secure/register.php')">
-            <div class="row card-body news-body">
-              <div class="col-sm-3">
-                <div class="post-image" style="background: url(/assets/image/post/green-travel-rewards-in-bracknell/reader.jpg) center no-repeat; background-size: 200px"></div>
-              </div>
-              <div class="col-sm-8 pt-3">
-                <h4 class="invert-header m-0 p-0">
-                  RESIDENT WITH SMART TAG
-                </h4>
-                <p class="mt-3 mb-3 mr-4">
-                  If you have smart tag then <a target="_blank" href="https://www.ecorewards.org.uk/secure/register.php">register</a> to get started. <br/>
-                  If you don’t have an e+ card or smart tag, <a href="{{ site.baseurl }}/contact">contact us</a>.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="row justify-content-md-center">
+          <p class="mt-3 mb-0">If you do not have a smartcard, smart tag or Member ID, contact us</p>
         </div>
-
       </div>
     </div>
   </div>
