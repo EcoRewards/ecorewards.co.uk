@@ -158,6 +158,7 @@ layout: default
 
     $("#smartcard").keydown(checkIfCanSubmit);
     $("#smartcard").ready(checkIfCanSubmit);
+    $("#deviceId").change(checkIfCanSubmit);
 
     $("#dateNow").ready(() => {
       const now = new Date();
