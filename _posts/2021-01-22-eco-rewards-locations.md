@@ -11,7 +11,7 @@ image: eco-rewards-reader-locations-announced/qr.jpg
 
 Participate in Eco Rewards in Bracknell by scanning QR codes with your mobile or touching e+ card, rail smartcard or smart tag on a blue reader. Find the Eco Rewards locations on your walking or cycle route.
 
-Find a reader on your walking or cycle route.
+Zoom in to your work, study or home location. Our locations are approximate and may be subject to change.
 
 <iframe src="https://www.google.com/maps/d/embed?mid=1gzlouWquyGDDlxxHmqtmWsZP1mdEuRA&ehbc=2E312F" width="100%" height="680" class="mb-4"></iframe>
 
