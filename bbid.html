@@ -9,52 +9,15 @@ layout: default
 <div class="album py-5 bg-light vertical-tight">
   <div class="container vertical-fill">
     <div class="row justify-content-md-center">
-      <form class="travel-form col-md-8">
+      <div class="col-md-8">
         <p class="mb-3">
-          Thank you for scanning our QR code
+          Thank you for scanning our QR sign. Please <a href="/contact">contact us</a> for invite to join for free and unique ID.
         </p>
-        <div class="form-group row">
-          <label for="deviceId" class="col-sm-4 col-form-label">Location</label>
-          <div class="col-sm-6">
-            <!--            <button type="button" id="scan-qr" class="btn btn-primary travel">SCAN QR CODE</button>-->
-            <div style="width: 100%" id="reader"></div>
-            <input type="hidden" id="deviceId" name="deviceId"/>
-            <input type="hidden" id="distance" name="distance" value="3.1"/>
-            <input type="hidden" id="latitude" name="latitude"/>
-            <input type="hidden" id="longitude" name="longitude"/>
-            <div style="margin-top: 6px" id="locationName"></div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="smartcard" class="col-sm-4 col-form-label">Enter Tag ID or smartcard number</label>
-          <div class="col-sm-6">
-            <input type="text"
-                   class="form-control"
-                   id="smartcard"
-                   name="memberId"
-                   pattern="^[0-9]*$"
-                   minLength="9"
-                   maxLength="18"
-                   aria-describedby="smartcardHelp"
-                   placeholder="e.g. 6338000000000001"
-                   required
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-          </div>
-          <div class="col-sm-6">
-            <input type="hidden"
-                   id="dateNow"
-                   name="date"
-            />
-            <button type="submit" disabled class="btn btn-primary travel">SUBMIT</button>
-          </div>
-        </div>
-        <p class="text-muted mt-5 mb-3">
-          If you have not yet registered with Eco Rewards <a href="/contact">contact us</a>. To see your carbon savings and access benefits, visit <a href="https://www.ecorewards.org.uk">https://www.ecorewards.org.uk</a> and logon to your account.
-          If you have any questions or feedback, please <a href="/contact">contact us</a>.
+        <p class="mb-3">
+          You can then use our mobile APP or camera phone to scan the QR sign and record your green journey.
+        </p>
+        <p class="mb-3">
+          To see your carbon savings and access benefits download the Eco Rewards APP or visit <a href="https://www.ecorewards.org.uk">https://www.ecorewards.org.uk</a> and logon to your account. If you have any questions or feedback, please <a href="/contact">contact us</a>.
         </p>
         <p class="text-muted">
           Any duplicate or excess reports will not be added to your account.
@@ -62,110 +25,8 @@ layout: default
         <p class="text-muted">
           Back to the <a href="/bracknell">Bracknell homepage</a>
         </p>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div id="reportJourneyModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">JOURNEY</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body form-success">
-        <div class="text-center">
-          <img src="/assets/image/tada.gif">
-        </div>
-        <p>
-          Thank you, your journey is being processed and your rewards and carbon saving will be calculated shortly.
-        </p>
-        <p>
-          For more information and to access your Eco Rewards account, go to <a href="https://www.ecorewards.org.uk">ecorewards.org.uk</a>.
-        </p>
-      </div>
-      <div class="modal-body form-error">
-        <p>There was an error processing your journey.</p>
-        <p class="modal-errors"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="https://github.com/mebjas/html5-qrcode/releases/download/V2.0.1/html5-qrcode.min.js"></script>
-<script defer>
-  window.addEventListener('DOMContentLoaded', async function() {
-    $(document).ready(async () => {
-      const response = await $.get("https://api.ecorewards.co.uk/locations");
-
-      const locations = response.data.reduce((index, location) => {
-        index[location.id.substring(location.id.lastIndexOf("/") + 1)] = location.name;
-
-        return index;
-      });
-
-      // If you want to prefer back camera
-      const html5QrCode = new Html5Qrcode("reader", false);
-      const config = { fps: 1, qrbox: 250 };
-
-      async function onScanSuccess(qrCodeMessage) {
-        $("#deviceId").val(qrCodeMessage).change();
-        await html5QrCode.stop();
-        $("#qr-shaded-region").toggle();
-
-        if (locations[qrCodeMessage]) {
-          $("#locationName").html(locations[qrCodeMessage]);
-        } else {
-          $("#scan-qr").toggle();
-          alert("QR code not recognised");
-        }
-      }
-
-      function getPosition(position) {
-        $("#latitude").val(position.coords.latitude);
-        $("#longitude").val(position.coords.longitude);
-      }
-
-      function onScanError(err) {}
-
-      $("#scan-qr").click(() => {
-        $("#scan-qr").toggle();
-        navigator.geolocation.getCurrentPosition(getPosition);
-        html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess, onScanError);
-      });
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const location = urlParams.get("location");
-
-      if (locations[location]) {
-        $("#scan-qr").toggle();
-        $("#deviceId").val(location).change();
-        $("#locationName").html(locations[location]);
-        navigator.geolocation.getCurrentPosition(getPosition);
-      }
-    });
-
-    function checkIfCanSubmit() {
-      const enabled = $("#smartcard").val().length > 8 && $("#deviceId").val();
-      $(".travel-form button[type=submit]").prop("disabled", !enabled);
-    }
-
-    $("#smartcard").keydown(checkIfCanSubmit);
-    $("#smartcard").ready(checkIfCanSubmit);
-
-    $("#dateNow").ready(() => {
-      const now = new Date();
-      $("#dateNow").val(now.toJSON());
-    })
-
-    $("button[data-dismiss=modal]").click(() => {
-      window.location.href = "/bracknell/active";
-    });
-  });
-</script>
