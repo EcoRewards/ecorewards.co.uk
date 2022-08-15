@@ -89,13 +89,15 @@ bracknell: true
         <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
 
       </div>
-      <div class="col-md-8">
-        <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
+      <div class="col-md-8 mt-4">
         <p>
           <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
           <a class="btn-primary btn" style="color: white;" href="/update-account">Update Account</a>
-          <a class="btn-primary btn" style="color: white;" href="https://www.ecorewards.org.uk/">Eco Rewards Website</a>
         </p>
+      </div>
+      {% include carousel.html %}
+      <div class="col-md-8 mt-4">
+        <iframe scrolling="no" height="260px" width="100%" src="https://www.ecorewards.org.uk/widget.php" frameborder="0"></iframe>
       </div>
     </div>
   </div>
@@ -174,7 +176,7 @@ bracknell: true
 </div>
 
 {% include modal.html %}
-{% include footer.html %}
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
