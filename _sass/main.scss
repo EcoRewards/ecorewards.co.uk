@@ -64,7 +64,8 @@ a, a:visited, a:hover, a:active {
   color: $color-primary;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary:visited {
+  color: $color-white;
   background-color: $color-primary;
   border-color: $color-primary;
 }
