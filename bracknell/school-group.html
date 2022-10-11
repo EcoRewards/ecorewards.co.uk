@@ -12,10 +12,46 @@ bracknell: true
         <div class="row">
           <div class="col text-center">
             <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Schools</h2>
-            <p>Welcome to the home page for Bracknell Schools and their communities.</p>
-            <p>Get our <a class="btn-primary btn" href="/mobile-app">Mobile APP</a></p>
-            <p><a class="btn-primary btn" href="/bracknell">Bracknell Scheme</a> For Bracknell Residents and Health membership go to <a class="btn-primary btn" href="/bracknell/active">ACTIVE</a></p>
-            <p>Discover our <a class="btn-primary btn" href="#offers">local offers and Access Rewards (discounts and cash-back benefits)</a></p>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="orgId">Select your school:</label>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control text-muted" id="orgId" name="organisation">
+                    <option value="/organisation/2">Easthampstead Park CS</option>
+                    <option value="/organisation/3">Garth Hill College</option>
+                    <option value="/organisation/12">Warfield Primary</option>
+                    <option value="/organisation/15">Kings Academy Secondary</option>
+                    <option value="/organisation/16">Kings Academy Primary</option>
+                    <option value="/organisation/14">Harmans Water Primary</option>
+                    <option value="/organisation/13">St Michaels Primary</option>
+                    <option value="/organisation/19">Ranelagh School</option>
+                    <option value="/organisation/17">St Josephs Primary</option>
+                    <option value="/organisation/23">Crown Wood Primary</option>
+                    <!--            <option value="/organisation/13">Pines Primary</option>-->
+                    <option value="/organisation/27">Jennett's Park Primary</option>
+                    <!--            <option value="/organisation/28">Fox Hill Primary</option>-->
+                    <!--            <option value="/organisation/23">Crowthorne CofE</option>-->
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-2">
+
+
+                <div class="col-md-4 text-right">
+                  <label for="orgId">Date:</label>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control text-muted" id="dateRange" name="dateRange">
+                    <option value="oneWeekAgo">Last Week</option>
+                    <option value="oneMonthAgo">Last Month</option>
+                    <option value="firstOfSeptember">1st September</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -44,79 +80,6 @@ bracknell: true
           <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
           <canvas style="display: none" id="primary_milesChart" ></canvas>
         </div>
-        <div class="row mt-5">
-          <div class="col text-center">
-            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-              <label class="btn btn-secondary active">
-                <input type="radio" name="high_chartToggle" value="#high_rewardChart" autocomplete="off" checked> Points
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="high_chartToggle" value="#high_carbonSavingChart" autocomplete="off"> Carbon Saving
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="high_chartToggle" value="#high_milesChart" autocomplete="off"> Green Miles
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="chart-container" style="position: relative; height:500px;">
-          <canvas id="high_rewardChart"></canvas>
-          <canvas style="display: none" id="high_carbonSavingChart"></canvas>
-          <canvas style="display: none" id="high_milesChart"></canvas>
-        </div>
-
-        <div class="row mt-5">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th>Participating Schools</th>
-              <th class="text-right">Points</th>
-              <th class="text-right">Carbon Saving</th>
-              <th class="text-right">Green Miles</th>
-            </tr>
-            </thead>
-            <tbody id="dataTable">
-
-            </tbody>
-          </table>
-          <p class="tableStartDate">Totals for each school since 1st June 2021</p>
-        </div>
-
-        <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
-        <div class="form-group">
-          <label for="memberId">Member ID:</label>
-          <input type="text" class="form-control text-muted" id="memberId" pattern="^[.0-9]*$"/>
-        </div>
-
-        <div class="form-group">
-          <label for="organisation">Select your school:</label>
-          <select class="form-control text-muted" id="organisation" name="organisation">
-            <option value="">Please select</option>
-            <option value="/organisation/2">Easthampstead Park CS</option>
-            <option value="/organisation/3">Garth Hill College</option>
-            <option value="/organisation/12">Warfield Primary</option>
-            <option value="/organisation/15">Kings Academy Secondary</option>
-            <option value="/organisation/16">Kings Academy Primary</option>
-            <option value="/organisation/14">Harmans Water Primary</option>
-            <option value="/organisation/13">St Michaels Primary</option>
-            <option value="/organisation/19">Ranelagh School</option>
-            <option value="/organisation/17">St Josephs Primary</option>
-            <option value="/organisation/23">Crown Wood Primary</option>
-<!--            <option value="/organisation/13">Pines Primary</option>-->
-            <option value="/organisation/27">Jennett's Park Primary</option>
-<!--            <option value="/organisation/28">Fox Hill Primary</option>-->
-<!--            <option value="/organisation/23">Crowthorne CofE</option>-->
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="memberGroup">Select your group:</label>
-          <select class="form-control text-muted" id="memberGroup" name="memberGroup">
-          </select>
-        </div>
-
-        <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
 
       </div>
       <div class="col-md-8 mt-4">
@@ -213,34 +176,35 @@ bracknell: true
 <script type="application/javascript">
 
   $(document).ready(() => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+    const firstOfSeptember = new Date();
+    firstOfSeptember.setMonth(8);
+    firstOfSeptember.setDate(1);
 
-    $("#submit").on("click", () => {
-      const memberId = $("#memberId").val();
-      const data = {
-        group: $("#memberGroup").val()
-      };
+    const dates = { oneWeekAgo, oneMonthAgo, firstOfSeptember };
 
-      $.ajax({
-        url: "https://api.ecorewards.co.uk/member/" + memberId,
-        type: "PATCH",
-        data: data,
-        success: () => {
-          window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId
-        },
-        error: () => {
-          alert('Invalid member ID');
-        }
-      });
-    });
+    const change = () => {
+      const orgId = $("#orgId").val();
+      const date = dates[$("#dateRange").val()];
+      const dateToString = date.toISOString().split('T')[0];
+      const url = `https://api.ecorewards.co.uk${orgId}/report?from=${dateToString}`;
+      $(".chart-container").html(`
+          <canvas id="primary_rewardChart"></canvas>
+          <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="primary_milesChart" ></canvas>
+      `);
+      setupGraphs(null, url, "primary_");
+    }
 
-    const url = 'https://api.ecorewards.co.uk/scheme/6/report';
-    const primary = ["Pines Primary", "Jennetts Park", "Fox Hills", "Crowthorne CofE", "Warfield Primary", "St Michaels Primary", "Kings Academy Primary", "Harmans Water Primary", "St Josephs Primary", "Crown Wood Primary", "Ascot Heath Primary"]
-    setupGraphs(primary, url, "primary_");
 
-    const high = ["Easthampstead Park CS", "Edgbarrow School", "Garth Hill College", "Kings Academy Secondary", "Ranelagh School"]
-    setupGraphs(high, url, "high_");
+    $("#orgId").change(change);
+    $("#dateRange").change(change);
 
-    setupTables(primary.concat(high).sort(), 6);
+    change();
+    // setupTables(primary.concat(high).sort(), 6);
   });
 
 </script>

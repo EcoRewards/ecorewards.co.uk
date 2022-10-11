@@ -20,7 +20,7 @@ function toggleButton() {
 $("#memberId").keypress(toggleButton);
 $("#memberGroup").change(toggleButton);
 
-function setupGraphs(organisations, schemeId, prefixId = "") {
+function setupGraphs(organisations, url, prefixId = "") {
 
   $("input[name=" + prefixId + "chartToggle]").click(function() {
     $("#" + prefixId + "rewardChart").css({ display: "none"});
@@ -29,7 +29,7 @@ function setupGraphs(organisations, schemeId, prefixId = "") {
     $($(this).val()).css({ display: "block" });
   });
 
-  $.get(`https://api.ecorewards.co.uk/scheme/${schemeId}/report` , response => {
+  $.get(url, response => {
     createGraph(prefixId + "rewardChart", "totalRewardsEarned", organisations, response);
     createGraph(prefixId + "carbonSavingChart", "totalCarbonSaving", organisations, response);
     createGraph(prefixId + "milesChart", "totalDistance", organisations, response);
@@ -41,7 +41,7 @@ function createGraph(id, field, organisations, response) {
   let colourI = 0;
   const colours = ["#4e73df", "#1cc88a", "#f6c23e", "#36b9cc",  "#e74a3b", "#858796", "#ff00ff", "#ff9900", "#674ea7"];
   const datasets = response.data.reduce((index, col) => {
-    if (organisations.includes(col.name)) {
+    if (organisations === null || organisations.includes(col.name)) {
       index[col.name] = index[col.name] || { data: [], label: col.name, backgroundColor: colours[colourI++ % colours.length] };
       index[col.name].data.push(col[field]);
     }
@@ -120,7 +120,6 @@ function createTable(organisations, response) {
 
     return index;
   }, {});
-  console.log(schoolData);
 
   const html = organisations
     .sort((a, b) => a.replace("St ", "") > b.replace("St ", ""))
