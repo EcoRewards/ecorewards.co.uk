@@ -39,10 +39,11 @@ bracknell: true
           </div>
         </div>
 
-        <canvas id="primary_rewardChart" width="400" height="240"></canvas>
-        <canvas style="display: none" id="primary_carbonSavingChart" width="400" height="240"></canvas>
-        <canvas style="display: none" id="primary_milesChart" width="400" height="240"></canvas>
-
+        <div class="chart-container" style="position: relative; height:400px;">
+          <canvas id="primary_rewardChart"></canvas>
+          <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="primary_milesChart" ></canvas>
+        </div>
         <div class="row mt-5">
           <div class="col text-center">
             <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
@@ -59,9 +60,11 @@ bracknell: true
           </div>
         </div>
 
-        <canvas id="high_rewardChart" width="400" height="240"></canvas>
-        <canvas style="display: none" id="high_carbonSavingChart" width="400" height="240"></canvas>
-        <canvas style="display: none" id="high_milesChart" width="400" height="240"></canvas>
+        <div class="chart-container" style="position: relative; height:500px;">
+          <canvas id="high_rewardChart"></canvas>
+          <canvas style="display: none" id="high_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="high_milesChart"></canvas>
+        </div>
 
         <div class="row mt-5">
           <table class="table table-striped">
@@ -100,6 +103,10 @@ bracknell: true
             <option value="/organisation/19">Ranelagh School</option>
             <option value="/organisation/17">St Josephs Primary</option>
             <option value="/organisation/23">Crown Wood Primary</option>
+<!--            <option value="/organisation/13">Pines Primary</option>-->
+            <option value="/organisation/27">Jennett's Park Primary</option>
+<!--            <option value="/organisation/28">Fox Hill Primary</option>-->
+<!--            <option value="/organisation/23">Crowthorne CofE</option>-->
           </select>
         </div>
 
@@ -226,7 +233,7 @@ bracknell: true
       });
     });
 
-    const primary = ["Warfield Primary", "St Michaels Primary", "Kings Academy Primary", "Harmans Water Primary", "St Josephs Primary", "Crown Wood Primary", "Ascot Heath Primary"]
+    const primary = ["Pines Primary", "Jennetts Park", "Fox Hills", "Crowthorne CofE", "Warfield Primary", "St Michaels Primary", "Kings Academy Primary", "Harmans Water Primary", "St Josephs Primary", "Crown Wood Primary", "Ascot Heath Primary"]
     setupGraphs(primary, 6, "primary_");
 
     const high = ["Easthampstead Park CS", "Edgbarrow School", "Garth Hill College", "Kings Academy Secondary", "Ranelagh School"]

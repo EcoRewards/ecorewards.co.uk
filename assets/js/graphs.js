@@ -59,6 +59,7 @@ function createGraph(id, field, organisations, response) {
       datasets: Object.values(datasets)
     },
     options: {
+      maintainAspectRatio: false,
       scales: {
         yAxes: [{
           ticks: {
