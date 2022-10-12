@@ -60,6 +60,28 @@ bracknell: true
           <p class="tableStartDate">Totals since 1st June 2021</p>
         </div>
 
+        <div class="row">
+          <div class="col text-center">
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="residents_chartToggle" value="#residents_rewardChart" autocomplete="off" checked> Points
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="residents_chartToggle" value="#residents_carbonSavingChart" autocomplete="off"> Carbon Saving
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="residents_chartToggle" value="#residents_milesChart" autocomplete="off"> Green Miles
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="position: relative; height:500px;">
+          <canvas id="residents_rewardChart"></canvas>
+          <canvas style="display: none" id="residents_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="residents_milesChart"></canvas>
+        </div>
+
         <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Your Tag, e+, Smartcard or Member ID number:</label>
@@ -143,6 +165,10 @@ bracknell: true
 
     setupGraphs(schools, url);
     setupTables(schools, url);
+
+    const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report';
+    setupGraphs(null, url, "residents_");
+
   });
 
 </script>
