@@ -61,6 +61,32 @@ bracknell: true
       <div class="col-md-8">
         <div class="row">
           <div class="col text-center">
+            <div class="row mt-5">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Classes</th>
+                  <th class="text-right">Points</th>
+                  <th class="text-right">Carbon Saving</th>
+                  <th class="text-right">Green Miles</th>
+                </tr>
+                </thead>
+                <tbody id="dataTable">
+
+                </tbody>
+              </table>
+              <p class="tableStartDate">Totals for each school since 1st June 2021</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
             <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
               <label class="btn btn-secondary active">
                 <input type="radio" name="primary_chartToggle" value="#primary_rewardChart" autocomplete="off" checked> Points
@@ -91,78 +117,6 @@ bracknell: true
       {% include carousel.html %}
     </div>
   </div>
-  <div class="row justify-content-md-center">
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/crownwood.png) center no-repeat; background-size: 110px"></div>
-        <div class="text-center">Crown Wood Primary</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/epcs-rev.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Easthampstead Park CS</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/ghc.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Garth Hill College</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-md-center">
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/warfield.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Warfield Primary</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/st-michaels.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">St Michaels Primary</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/kings.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Kings Academy</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row justify-content-md-center">
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/harmans.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Harmans Water Primary</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/ranelagh.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">Ranelagh School</div>
-      </div>
-    </div>
-
-    <div class="card shadow-sm school-image-sm mt-3 text-left col-sm-2">
-      <div class="card-body">
-        <div class="post-image" style="background: url(/assets/image/orgs/st-josephs.png) center no-repeat; background-size: 80px"></div>
-        <div class="text-center">St Josephs Primary</div>
-      </div>
-    </div>
-
-  </div>
-
 </div>
 
 {% include modal.html %}
@@ -190,21 +144,20 @@ bracknell: true
       const orgId = $("#orgId").val();
       const date = dates[$("#dateRange").val()];
       const dateToString = date.toISOString().split('T')[0];
-      const url = `https://api.ecorewards.co.uk${orgId}/report?from=${dateToString}`;
+      const url = `https://api.ecorewards.co.uk${orgId}/report`;
       $(".chart-container").html(`
           <canvas id="primary_rewardChart"></canvas>
           <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
           <canvas style="display: none" id="primary_milesChart" ></canvas>
       `);
-      setupGraphs(null, url, "primary_");
+      setupGraphs(null, url + `?from=${dateToString}`, "primary_");
+      setupTables(null, url, date);
     }
-
 
     $("#orgId").change(change);
     $("#dateRange").change(change);
 
     change();
-    // setupTables(primary.concat(high).sort(), 6);
   });
 
 </script>

@@ -71,8 +71,8 @@ function createGraph(id, field, organisations, response) {
   });
 }
 
-function setupTables(organisations, schemeId) {
-  const date = new Date();
+function setupTables(organisations, url, from = null) {
+  const defaultDate = new Date();
 
   // 1st Aug, 1st Nov, 1st Jan, 1st March, 1st April, 1st June
   const monthMap = {
@@ -90,12 +90,14 @@ function setupTables(organisations, schemeId) {
     11: 10
   };
 
-  date.setMonth(monthMap[date.getMonth()]);
-  date.setDate(1);
+  defaultDate.setMonth(monthMap[defaultDate.getMonth()]);
+  defaultDate.setDate(1);
 
-  $.get(`https://api.ecorewards.co.uk/scheme/${schemeId}/report?from=` + date.toJSON().substr(0, date.toJSON().indexOf("T")), response => {
+  const fromDate = from || defaultDate;
+
+  $.get(`${url}?from=${fromDate.toISOString().split('T')[0]}`, response => {
     createTable(organisations, response);
-    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][date.getMonth()];
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][fromDate.getMonth()];
     const nth = function(d) {
       if (d > 3 && d < 21) return 'th';
       switch (d % 10) {
@@ -106,7 +108,7 @@ function setupTables(organisations, schemeId) {
       }
     }
 
-    $(".tableStartDate").html(`Totals since ${date.getDate()}${nth(date.getDate())} ${month} ${date.getFullYear()}`);
+    $(".tableStartDate").html(`Totals since ${fromDate.getDate()}${nth(fromDate.getDate())} ${month} ${fromDate.getFullYear()}`);
   });
 
 }
@@ -121,7 +123,7 @@ function createTable(organisations, response) {
     return index;
   }, {});
 
-  const html = organisations
+  const html = (organisations || Object.keys(schoolData))
     .sort((a, b) => a.replace("St ", "") > b.replace("St ", ""))
     .filter(school => schoolData[school])
     .map(school => `
