@@ -166,10 +166,10 @@ bracknell: true
     setupGraphs(schools, url);
     setupTables(schools, url);
 
-    const groups = ['Binfield Residents', 'Bracknell Residents', 'Crowthorne Residents', 'Sandhurst Residents', 'Warfield Residents', 'Winkfield Residents'];
+    // const groups = ['Binfield Residents', 'Bracknell Residents', 'Crowthorne Residents', 'Sandhurst Residents', 'Warfield Residents', 'Winkfield Residents'];
     const date = getDefaultDate();
     const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + date.toISOString().split('T')[0];
-    setupGraphs(groups, residentsUrl, "residents_", createCumulativeGraph);
+    setupGraphs(null, residentsUrl, "residents_", createCumulativeGraph);
 
   });
 
