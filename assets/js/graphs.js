@@ -20,7 +20,7 @@ function toggleButton() {
 $("#memberId").keypress(toggleButton);
 $("#memberGroup").change(toggleButton);
 
-function setupGraphs(organisations, url, prefixId = "") {
+function setupGraphs(organisations, url, prefixId = "", graphConstructor = createGraph) {
 
   $("input[name=" + prefixId + "chartToggle]").click(function() {
     $("#" + prefixId + "rewardChart").css({ display: "none"});
@@ -30,9 +30,9 @@ function setupGraphs(organisations, url, prefixId = "") {
   });
 
   $.get(url, response => {
-    createGraph(prefixId + "rewardChart", "totalRewardsEarned", organisations, response);
-    createGraph(prefixId + "carbonSavingChart", "totalCarbonSaving", organisations, response);
-    createGraph(prefixId + "milesChart", "totalDistance", organisations, response);
+    graphConstructor(prefixId + "rewardChart", "totalRewardsEarned", organisations, response);
+    graphConstructor(prefixId + "carbonSavingChart", "totalCarbonSaving", organisations, response);
+    graphConstructor(prefixId + "milesChart", "totalDistance", organisations, response);
   });
 }
 
@@ -71,7 +71,48 @@ function createGraph(id, field, organisations, response) {
   });
 }
 
-function setupTables(organisations, url, from = null) {
+function createCumulativeGraph(id, field, organisations, response) {
+  const ctx = document.getElementById(id).getContext("2d");
+  let colourI = 0;
+  const colours = ["#4e73df", "#1cc88a", "#f6c23e", "#36b9cc",  "#e74a3b", "#858796", "#ff00ff", "#ff9900", "#674ea7"];
+  const data = response.data.reduce((index, col) => {
+    if (organisations === null || organisations.includes(col.name)) {
+      index[col.name] = index[col.name] || 0;
+      index[col.name] += col[field];
+    }
+
+    return index;
+  }, {});
+
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: organisations || Object.keys(data),
+      datasets: [{
+        data: Object.values(data),
+        backgroundColor: Object.keys(data).map(() => colours[colourI++ % colours.length]),
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      tooltips: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+function getDefaultDate() {
   const defaultDate = new Date();
 
   // 1st Aug, 1st Nov, 1st Jan, 1st March, 1st April, 1st June
@@ -93,7 +134,10 @@ function setupTables(organisations, url, from = null) {
   defaultDate.setMonth(monthMap[defaultDate.getMonth()]);
   defaultDate.setDate(1);
 
-  const fromDate = from || defaultDate;
+  return defaultDate;
+}
+
+function setupTables(organisations, url, fromDate = getDefaultDate()) {
 
   $.get(`${url}?from=${fromDate.toISOString().split('T')[0]}`, response => {
     createTable(organisations, response);
