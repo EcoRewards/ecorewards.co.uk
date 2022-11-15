@@ -87,7 +87,7 @@ function createCumulativeGraph(id, field, organisations, response) {
   const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: organisations || Object.keys(data),
+      labels: Object.keys(data),
       datasets: [{
         data: Object.values(data),
         backgroundColor: Object.keys(data).map(() => colours[colourI++ % colours.length]),
