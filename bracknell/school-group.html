@@ -138,6 +138,9 @@ bracknell: true
     const oneMonthAgo = new Date();
     oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
     const firstOfSeptember = new Date();
+    if (firstOfSeptember.getMonth() < 8) {
+      firstOfSeptember.setFullYear(firstOfSeptember.getFullYear() - 1);
+    }
     firstOfSeptember.setMonth(8);
     firstOfSeptember.setDate(1);
 
