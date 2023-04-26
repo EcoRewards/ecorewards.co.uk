@@ -1,0 +1,156 @@
+---
+title: Eco Rewards - Rewarding Green Travel Choices
+description: Earn reward points for making greener travel choices
+layout: default
+bracknell: true
+---
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
+            <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Groups</h2>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-4 text-right">
+                  <label for="orgId">Select your group:</label>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control text-muted" id="orgId" name="organisation">
+                    <option value="/organisation/22">Bracknell Forest Health</option>
+                    <option value="/organisation/4">Bracknell Forest Council</option>
+                    <option value="/organisation/5">SWR Customers</option>
+                    <option value="/organisation/9">Bracknell Forest Residents</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-2">
+
+
+                <div class="col-md-4 text-right">
+                  <label for="orgId">Date:</label>
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control text-muted" id="dateRange" name="dateRange">
+                    <option value="oneWeekAgo">Last Week</option>
+                    <option value="oneMonthAgo">Last Month</option>
+                    <option value="firstOfSeptember">1st September</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
+            <div class="row mt-5">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Classes</th>
+                  <th class="text-right">Points</th>
+                  <th class="text-right">Carbon Saving</th>
+                  <th class="text-right">Green Miles</th>
+                </tr>
+                </thead>
+                <tbody id="dataTable">
+
+                </tbody>
+              </table>
+              <p class="tableStartDate">Totals for each group since 1st June 2021</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="primary_chartToggle" value="#primary_rewardChart" autocomplete="off" checked> Points
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="primary_chartToggle" value="#primary_carbonSavingChart" autocomplete="off"> Carbon Saving
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="primary_chartToggle" value="#primary_milesChart" autocomplete="off"> Green Miles
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="position: relative; height:400px;">
+          <canvas id="primary_rewardChart"></canvas>
+          <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="primary_milesChart" ></canvas>
+        </div>
+
+      </div>
+      <div class="col-md-8 mt-4">
+        <p>
+          <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
+          <a class="btn-primary btn" style="color: white;" href="/update-account">Update Account</a>
+        </p>
+      </div>
+      {% include carousel.html %}
+    </div>
+  </div>
+</div>
+
+{% include modal.html %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="{{ site.baseurl }}/assets/js/script.js"></script>
+<script src="{{ site.baseurl }}/assets/js/graphs.js"></script>
+<script type="application/javascript">
+
+  $(document).ready(() => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+    const firstOfSeptember = new Date();
+    if (firstOfSeptember.getMonth() < 8) {
+      firstOfSeptember.setFullYear(firstOfSeptember.getFullYear() - 1);
+    }
+    firstOfSeptember.setMonth(8);
+    firstOfSeptember.setDate(1);
+
+    const dates = { oneWeekAgo, oneMonthAgo, firstOfSeptember };
+
+    const change = () => {
+      const orgId = $("#orgId").val();
+      const date = dates[$("#dateRange").val()];
+      const dateToString = date.toISOString().split('T')[0];
+      const url = `https://api.ecorewards.co.uk${orgId}/report`;
+      $(".chart-container").html(`
+          <canvas id="primary_rewardChart"></canvas>
+          <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="primary_milesChart" ></canvas>
+      `);
+      setupGraphs(null, url + `?from=${dateToString}`, "primary_", createCumulativeGraph);
+      setupTables(null, url, date);
+    }
+
+    $("#orgId").change(change);
+    $("#dateRange").change(change);
+
+    change();
+  });
+
+</script>
