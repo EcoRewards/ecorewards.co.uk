@@ -4,7 +4,12 @@
       <div class="col-md-8">
         <h2 class="heading heading--md heading--color-1 mb-5">Latest News & Updates</h2>
 
-        <a class="twitter-timeline" data-height="600" href="https://twitter.com/EcoRewards?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="gxfHNzEW"></script>
+        <div class="col-md-12">
+          <div class="fb-page" data-href="https://www.facebook.com/ecorewards" data-tabs="timeline" data-width="500" data-height="500" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/ecorewards" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ecorewards">EcoRewards</a></blockquote></div>
+        </div>
+
         {% for post in site.posts limit: 10 %}
           <div class="card shadow-sm mt-3 text-left">
             <div class="card-link" onclick="location.href='{{post.url}}'">
