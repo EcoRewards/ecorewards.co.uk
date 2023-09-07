@@ -159,7 +159,7 @@ bracknell: true
           <canvas style="display: none" id="primary_carbonSavingChart"></canvas>
           <canvas style="display: none" id="primary_milesChart" ></canvas>
       `);
-      setupGraphs(null, url + `?from=${dateToString}`, "primary_", createCumulativeGraph);
+      $.get(url + `?from=${dateToString}`, response => setupGraphs(null, response, "primary_", createCumulativeGraph));
       setupTables(null, url, date);
     }
 

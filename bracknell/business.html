@@ -173,7 +173,7 @@ bracknell: true
     const schools = ["Bracknell BID", "Bracknell Forest Residents", "SWR Customers"]
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
 
-    setupGraphs(schools, url);
+    $.get(url, response => setupGraphs(schools, response));
     setupTables(schools, url);
   });
 

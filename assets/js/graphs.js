@@ -20,7 +20,7 @@ function toggleButton() {
 $("#memberId").keypress(toggleButton);
 $("#memberGroup").change(toggleButton);
 
-function setupGraphs(organisations, url, prefixId = "", graphConstructor = createGraph) {
+function setupGraphs(organisations, apiResponse, prefixId = "", graphConstructor = createGraph) {
 
   $("input[name=" + prefixId + "chartToggle]").click(function() {
     $("#" + prefixId + "rewardChart").css({ display: "none"});
@@ -29,11 +29,9 @@ function setupGraphs(organisations, url, prefixId = "", graphConstructor = creat
     $($(this).val()).css({ display: "block" });
   });
 
-  $.get(url, response => {
-    graphConstructor(prefixId + "rewardChart", "totalRewardsEarned", organisations, response);
-    graphConstructor(prefixId + "carbonSavingChart", "totalCarbonSaving", organisations, response);
-    graphConstructor(prefixId + "milesChart", "totalDistance", organisations, response);
-  });
+  graphConstructor(prefixId + "rewardChart", "totalRewardsEarned", organisations, apiResponse);
+  graphConstructor(prefixId + "carbonSavingChart", "totalCarbonSaving", organisations, apiResponse);
+  graphConstructor(prefixId + "milesChart", "totalDistance", organisations, apiResponse);
 }
 
 function createGraph(id, field, organisations, response) {
