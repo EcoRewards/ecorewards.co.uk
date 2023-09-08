@@ -236,8 +236,9 @@ function getParishData(orgData, groupsData) {
       name: parish
     })));
 
-  console.log(dataMappedToParish.concat(rowsWithNoParishSplit));
-
-  return dataMappedToParish.concat(rowsWithNoParishSplit).sort((a, b) => parishes.indexOf(a.name) > parishes.indexOf(b.name));
+  return dataMappedToParish
+    .concat(rowsWithNoParishSplit)
+    .filter(row => row.name)
+    .toSorted((a, b) => parishes.indexOf(a.name) - parishes.indexOf(b.name));
 }
 </script>
