@@ -22,7 +22,31 @@ bracknell: true
     </div>
     <div class="row justify-content-md-center">
       <div class="col-md-8">
+
         <div class="row">
+          <div class="col text-center">
+
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="parish_chartToggle" value="#parish_rewardChart" autocomplete="off" checked> Points
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="parish_chartToggle" value="#parish_carbonSavingChart" autocomplete="off"> Carbon Saving
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="parish_chartToggle" value="#parish_milesChart" autocomplete="off"> Green Miles
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="position: relative; height:500px;">
+          <canvas id="parish_rewardChart"></canvas>
+          <canvas style="display: none" id="parish_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="parish_milesChart"></canvas>
+        </div>
+        <p class="tableStartDate">Totals since 1st June 2021</p>
+        <div class="row mb-5">
           <div class="col text-center">
             <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
               <label class="btn btn-secondary active">
@@ -82,31 +106,6 @@ bracknell: true
           <canvas style="display: none" id="residents_milesChart"></canvas>
         </div>
 
-<!--        <h2 id="parish" class="heading heading&#45;&#45;md heading&#45;&#45;color-1 mt-5">Parish Data</h2>-->
-
-<!--        <div class="row">-->
-<!--          <div class="col text-center">-->
-
-<!--            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">-->
-<!--              <label class="btn btn-secondary active">-->
-<!--                <input type="radio" name="parish_chartToggle" value="#parish_rewardChart" autocomplete="off" checked> Points-->
-<!--              </label>-->
-<!--              <label class="btn btn-secondary">-->
-<!--                <input type="radio" name="parish_chartToggle" value="#parish_carbonSavingChart" autocomplete="off"> Carbon Saving-->
-<!--              </label>-->
-<!--              <label class="btn btn-secondary">-->
-<!--                <input type="radio" name="parish_chartToggle" value="#parish_milesChart" autocomplete="off"> Green Miles-->
-<!--              </label>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="chart-container" style="position: relative; height:500px;">-->
-<!--          <canvas id="parish_rewardChart"></canvas>-->
-<!--          <canvas style="display: none" id="parish_carbonSavingChart"></canvas>-->
-<!--          <canvas style="display: none" id="parish_milesChart"></canvas>-->
-<!--        </div>-->
-
         <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
         <div class="form-group">
           <label for="memberId">Your Tag, e+, Smartcard or Member ID number:</label>
@@ -133,12 +132,15 @@ bracknell: true
         <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
 
       </div>
+
       <div class="col-md-8 mt-4">
         <p>
           <a class="btn-primary btn" style="color: white;" href="/selfreport">Self Reporting</a>
           <a class="btn-primary btn" style="color: white;" href="/update-account">Update Account</a>
         </p>
       </div>
+      {% include news.html %}
+
       {% include carousel.html %}
     </div>
   </div>
@@ -186,7 +188,7 @@ bracknell: true
       });
     });
 
-    const schools = ["SWR Customers", "Bracknell Forest Residents", "Bracknell Forest Health", "Bracknell Forest Council"];
+    const schools = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
 
     setupTables(schools, url);
@@ -200,7 +202,7 @@ bracknell: true
 
       $.get(residentsUrl, groupData => {
         setupGraphs(groups, groupData, "residents_", createCumulativeGraph);
-        //setupGraphs(parishes, { data: getParishData(orgData, groupData)}, "parish_", createCumulativeGraph);
+        setupGraphs(parishes, { data: getParishData(orgData, groupData)}, "parish_", createCumulativeGraph);
       });
 
 
@@ -210,35 +212,35 @@ bracknell: true
 
 const parishMap = {
   "Ascot Heath Primary": "Winkfield",
-  "B and W College": "BTC",
+  "B and W College": "Bracknell Town",
   "Bracknell Forest Council": "",
   "Bracknell Forest Health": "",
   "Bracknell Forest Residents": "",
   "BF Trial": "",
   "Binfield": "Binfield",
-  "Bracknell (Town)": "BTC",
+  "Bracknell (Town)": "Bracknell Town",
   "Crowthorne": "Crowthorne",
   "Sandhurst": "Sandhurst",
   "Warfield": "Warfield",
   "Winkfield": "Winkfield",
-  "Crown Wood Primary": "BTC",
+  "Crown Wood Primary": "Bracknell Town",
   "Crowthorne Primary": "Crowthorne",
-  "Easthampstead Park CS": "BTC",
+  "Easthampstead Park CS": "Bracknell Town",
   "Edgbarrow School": "Crowthorne",
-  "Fox Hill Primary": "BTC",
-  "Garth Hill College": "BTC",
-  "Harmans Water Primary": "BTC",
-  "Jennetts Park Primary": "BTC",
+  "Fox Hill Primary": "Bracknell Town",
+  "Garth Hill College": "Bracknell Town",
+  "Harmans Water Primary": "Bracknell Town",
+  "Jennetts Park Primary": "Bracknell Town",
   "Kings Academy Primary": "Binfield",
   "Kings Academy Secondary": "Binfield",
-  "Ranelagh School": "BTC",
-  "Sandy Lane Primary": "BTC",
-  "St Josephs Primary": "BTC",
+  "Ranelagh School": "Bracknell Town",
+  "Sandy Lane Primary": "Bracknell Town",
+  "St Josephs Primary": "Bracknell Town",
   "St Michaels Primary": "Sandhurst",
   "SWR Customers": "",
   "Martins Heron": "Winkfield",
-  "Bracknell Stn": "BTC",
-  "The Pines Primary": "BTC",
+  "Bracknell Stn": "Bracknell Town",
+  "The Pines Primary": "Bracknell Town",
   "Warfield Primary": "Warfield",
 };
 // get unique values from parishMap
@@ -262,6 +264,6 @@ function getParishData(orgData, groupsData) {
 
   console.log(dataMappedToParish.concat(rowsWithNoParishSplit));
 
-  return dataMappedToParish.concat(rowsWithNoParishSplit);
+  return dataMappedToParish.concat(rowsWithNoParishSplit).sort((a, b) => a.name > b.name);
 }
 </script>
