@@ -207,11 +207,13 @@ layout: default
 
 
   $(document).ready(() => {
-    const schools = ["Bracknell BID", "Bracknell Forest Residents", "SWR Customers", "NEP UK Ltd", "Bracknell Forest Council"]
+    const schools = ["Bracknell BID", "Bracknell Forest Residents", "SWR Customers", "NEP UK Ltd", "Bracknell Forest Council"];
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
 
-    setupGraphs(schools, url);
-    setupTables(schools, url);
+    $.get(url, data => {
+      setupGraphs(schools, data);
+      setupTables(schools, data);
+    });
   });
 
 </script>
