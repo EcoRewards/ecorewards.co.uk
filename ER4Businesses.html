@@ -210,9 +210,10 @@ layout: default
     const schools = ["Bracknell BID", "Bracknell Forest Residents", "SWR Customers", "NEP UK Ltd", "Bracknell Forest Council"];
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
 
+    setupTables(schools, url);
+
     $.get(url, data => {
       setupGraphs(schools, data);
-      setupTables(schools, data);
     });
   });
 
