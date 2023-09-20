@@ -168,9 +168,9 @@ bracknell: true
       });
     });
 
+    const primary = ["The Pines Primary", "Jennetts Park Primary", "Fox Hill Primary", "Crowthorne Primary", "Warfield Primary", "St Michaels Primary", "Kings Academy Primary", "Harmans Water Primary", "St Josephs Primary", "Crown Wood Primary", "Ascot Heath Primary", "Sandy Lane Primary"]
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
     $.get(url, response => {
-      const primary = ["The Pines Primary", "Jennetts Park Primary", "Fox Hill Primary", "Crowthorne Primary", "Warfield Primary", "St Michaels Primary", "Kings Academy Primary", "Harmans Water Primary", "St Josephs Primary", "Crown Wood Primary", "Ascot Heath Primary", "Sandy Lane Primary"]
       setupGraphs(primary, response, "primary_");
 
       const high = ["Bracknell College", "Wokingham College", "B and W College", "Easthampstead Park CS", "Edgbarrow School", "Garth Hill College", "Kings Academy Secondary", "Ranelagh School"]
