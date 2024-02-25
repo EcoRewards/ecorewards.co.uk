@@ -41,6 +41,15 @@ layout: default
           </div>
         </div>
         <div class="form-group row">
+          <label for="type" class="col-sm-4 col-form-label">Type of journey</label>
+          <div class="col-sm-6">
+            <select class="form-control text-muted" id="type" name="type">
+              <option value="journey">Journey</option>
+              <option value="leisure">Leisure</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
           <div class="col-sm-4">
           </div>
           <div class="col-sm-6">
@@ -111,7 +120,7 @@ layout: default
       const response = await $.get("https://api.ecorewards.co.uk/locations");
 
       const locations = response.data.reduce((index, location) => {
-        index[location.id.substring(location.id.lastIndexOf("/") + 1)] = location.name;
+        index[location.id.substring(location.id.lastIndexOf("/") + 1)] = location;
 
         return index;
       }, {});
@@ -126,7 +135,8 @@ layout: default
         $("#qr-shaded-region").toggle();
 
         if (locations[qrCodeMessage]) {
-          $("#locationName").html(locations[qrCodeMessage]);
+          $("#locationName").html(locations[qrCodeMessage].name);
+          $("#type").val(locations[qrCodeMessage].defaultJourneyType);
         } else {
           $("#scan-qr").toggle();
           alert("QR code not recognised");
@@ -152,7 +162,8 @@ layout: default
       if (locations[location]) {
         $("#scan-qr").toggle();
         $("#deviceId").val(location).change();
-        $("#locationName").html(locations[location]);
+        $("#locationName").html(locations[location].name);
+        $("#type").val(locations[location].defaultJourneyType);
         navigator.geolocation.getCurrentPosition(getPosition);
       }
     });
