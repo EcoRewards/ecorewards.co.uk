@@ -8,6 +8,7 @@ baseurl: ""
 lang: "en"
 plugins:
   - jekyll-minifier
+  - jekyll-redirect-from
 exclude:
   - README.md
   - vendor/
