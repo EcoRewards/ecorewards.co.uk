@@ -12,9 +12,30 @@ layout: default
     <div class="row justify-content-md-center">
       <div class="col-md-8">
         <p>
-          If you are enquiring about joining in Bracknell, please try our <a href="/mobile-app">Mobile App</a>.
+          If enquiring to join in Bracknell Forest, please download our <a href="/mobile-app">App</a>.
         </p>
         <form action="https://formspree.io/f/mjvpnvwo" method="POST" _lpchecked="1">
+          <div class="row">
+            <div class="col-lg-3 mx-auto my-2">
+              <label for="enquiring-as-input">Are you enquiring as</label>
+            </div>
+            <div class="col-lg-9 mx-auto my-2">
+              <select class="form-control" id="enquiring-as-input" name="enquiring-as" required="">
+                <option value="Individual">An individual</option>
+                <option value="School">A school</option>
+                <option value="Business">A business</option>
+                <option value="Community">A community</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 mx-auto my-2">
+              <label for="name-city">Nearest town/city</label>
+            </div>
+            <div class="col-lg-9 mx-auto my-2">
+              <input class="form-control" type="text" id="name-city" name="city" required="">
+            </div>
+          </div>
           <div class="row">
             <div class="col-lg-3 mx-auto my-2">
               <label for="name-input">Name</label>
@@ -47,6 +68,7 @@ layout: default
             </div>
           </div>
         </form>
+        <p>We will send you information about the scheme and how to join.</p>
       </div>
     </div>
   </div>
