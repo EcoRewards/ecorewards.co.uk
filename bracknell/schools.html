@@ -13,9 +13,10 @@ bracknell: true
           <div class="col text-center">
             <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Schools</h2>
             <p>Welcome to the home page for Bracknell Schools and their communities.</p>
-            <p>To join the scheme download <a class="btn-primary btn" href="/mobile-app"><b>Our Mobile APP</b></a></p>
-            <p><a class="btn-primary btn" href="/bracknell">Bracknell Scheme</a> For Bracknell Residents and Health membership go to <a class="btn-primary btn" href="/bracknell/active">ACTIVE</a></p>
-            <p>Discover our <a class="btn-primary btn" href="#offers">local offers and Access Rewards (discounts and cash-back benefits)</a></p>
+            <p id="mobileApp"><a class="btn-primary btn" href="/mobile-app"><b>Download our mobile app to join</b></a></p>
+            <p>For Bracknell go to <a href="/bracknell">Bracknell Scheme</a>.</p>
+            <p>For Bracknell Residents and Health membership go to <a href="/bracknell/active">Active</a>.</p>
+            <p>Discover our <a href="#offers">local offers and Access Rewards (discounts and cash-back benefits)</a>.</p>
           </div>
         </div>
       </div>
@@ -83,7 +84,11 @@ bracknell: true
           <p class="tableStartDate">Totals for each school since 1st June 2021</p>
         </div>
 
-        <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
+        <div class="row justify-content-md-center text-center">
+          <div class="col-md-8">
+            <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
+          </div>
+        </div>
         <div class="form-group">
           <label for="memberId">Member ID:</label>
           <input type="text" class="form-control text-muted" id="memberId" pattern="^[.0-9]*$"/>
