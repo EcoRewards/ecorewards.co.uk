@@ -181,13 +181,23 @@ bracknell: true
 
       const date = getDefaultDate();
       const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + date.toISOString().split('T')[0];
+      const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + date.toISOString().split('T')[0];
+      const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + date.toISOString().split('T')[0];
+      const promises = [residentsUrl, gwrUrl, swrUrl].map(url => $.get(url).promise());
 
-      $.get(residentsUrl, groupData => {
-        setupGraphs(parishes, { data: getParishData(orgData, groupData)}, "parish_", createCumulativeGraph);
-      });
+      Promise
+        .all(promises)
+        .then(([bfResidentsData, gwrData, swrData]) => {
+          const responseData = bfResidentsData.data.concat(gwrData.data).concat(swrData.data).concat(orgData.data);
+          const data = getParishData(responseData);
+
+          setupGraphs(parishes, { data }, "parish_", createCumulativeGraph);
+        });
     });
   });
 
+
+// "" means equally split, false means not counted as the organisations groups will be counted instead
 
 const parishMap = {
   "Ascot Heath Primary": "Winkfield",
@@ -195,7 +205,7 @@ const parishMap = {
   "Wood Hill Primary": "Bracknell Town",
   "Bracknell Forest Council": "",
   "Bracknell Forest Health": "",
-  "Bracknell Forest Residents": "",
+  "Bracknell Forest Residents": false,
   "BF Trial": "",
   "Binfield": "Binfield",
   "Bracknell (Town)": "Bracknell Town",
@@ -219,7 +229,9 @@ const parishMap = {
   "Sandy Lane Primary": "Bracknell Town",
   "St Josephs Primary": "Bracknell Town",
   "St Michaels Primary": "Sandhurst",
-  "SWR Customers": "Winkfield",
+  "SWR Customers": false,
+  "BF Rail Customers": "Bracknell Town",
+  "MH Rail Customers": "Winkfield",
   "Martins Heron": "Winkfield",
   "Bracknell Stn": "Bracknell Town",
   "The Pines Primary": "Bracknell Town",
@@ -227,15 +239,15 @@ const parishMap = {
   "Winkfield St Marys Primary": "Winkfield",
   "Bright Horizon Nursery": "Bracknell Town",
   "Wildmoor Heath Primary": "Crowthorne",
-  "GWR Customers": "Crowthorne",
+  "GWR Customers": false,
+  "Crowthorne Rail": "Crowthorne",
+  "Sandhurst Rail": "Sandhurst",
 };
 // get unique values from parishMap
 const parishes = ['Bracknell Town', 'Binfield', 'Crowthorne', 'Sandhurst', 'Warfield', 'Winkfield'];
 
-function getParishData(orgData, groupsData) {
-
-  const dataMappedToParish = orgData.data
-    .concat(groupsData.data)
+function getParishData(orgAndGroupData) {
+  const dataMappedToParish = orgAndGroupData
     .map(data => ({...data, name: parishMap[data.name]}));
 
   // split groups without Parish over the 6 parishes
