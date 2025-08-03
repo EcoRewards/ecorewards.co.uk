@@ -14,6 +14,10 @@ bracknell: true
             <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Active</h2>
             <p>Welcome to the home page for Bracknell Residents and Bracknell Health members.</p>
             <p id="mobileApp"><a class="btn-primary btn" href="/mobile-app"><b>Download our mobile app to join</b></a></p>
+            <p>
+              <a href="https://play.google.com/store/apps/details?id=com.ecoreward" class="btn btn-primary">Go to Google Play</a>
+              <a href="https://apps.apple.com/in/app/eco-rewards/id1634208068" class="btn btn-primary">Go to App Store</a>
+            </p>
             <p>For Bracknell go to <a href="/bracknell">Bracknell Scheme</a>.</p>
             <p>For Bracknell Schools league tables and registration go to <a href="/bracknell/schools">schools</a>.</p>
             <p>Discover our <a href="#offers">local offers and Access Rewards (discounts and cash-back benefits)</a>.</p>
@@ -172,17 +176,18 @@ bracknell: true
     });
 
     const schools = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
-    const url = 'https://api.ecorewards.co.uk/scheme/6/report';
+    const date = getDefaultDate();
+    const dateString = date.toISOString().split('T')[0];
+    const url = 'https://api.ecorewards.co.uk/scheme/6/report?from=' + dateString;
 
     setupTables(schools, url);
 
     $.get(url, orgData => {
       setupGraphs(schools, orgData);
 
-      const date = getDefaultDate();
-      const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + date.toISOString().split('T')[0];
-      const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + date.toISOString().split('T')[0];
-      const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + date.toISOString().split('T')[0];
+      const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + dateString;
+      const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + dateString;
+      const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + dateString;
       const promises = [residentsUrl, gwrUrl, swrUrl].map(url => $.get(url).promise());
 
       Promise
@@ -242,6 +247,8 @@ const parishMap = {
   "GWR Customers": false,
   "Crowthorne Rail": "Crowthorne",
   "Sandhurst Rail": "Sandhurst",
+  "RMP Yorktown Road": "Sandhurst",
+  "RMP Owlsmoor": "Sandhurst",
 };
 // get unique values from parishMap
 const parishes = ['Bracknell Town', 'Binfield', 'Crowthorne', 'Sandhurst', 'Warfield', 'Winkfield'];
