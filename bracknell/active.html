@@ -177,12 +177,12 @@ bracknell: true
 
     const schools = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
     const date = getDefaultDate();
+    const url = 'https://api.ecorewards.co.uk/scheme/6/report';
     const dateString = date.toISOString().split('T')[0];
-    const url = 'https://api.ecorewards.co.uk/scheme/6/report?from=' + dateString;
 
-    setupTables(schools, url);
+    setupTables(schools, url, date);
 
-    $.get(url, orgData => {
+    $.get(url + "?from=" + dateString, orgData => {
       setupGraphs(schools, orgData);
 
       const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + dateString;
@@ -203,13 +203,14 @@ bracknell: true
 
 
 // "" means equally split, false means not counted as the organisations groups will be counted instead
+// if an organisation e.g Bracknell Forest Health has groups in the list then it will be set to false so the groups can be counted instead
 
 const parishMap = {
   "Ascot Heath Primary": "Winkfield",
   "B and W College": "Bracknell Town",
   "Wood Hill Primary": "Bracknell Town",
   "Bracknell Forest Council": "",
-  "Bracknell Forest Health": "",
+  "Bracknell Forest Health": false,
   "Bracknell Forest Residents": false,
   "BF Trial": "",
   "Binfield": "Binfield",
@@ -249,6 +250,9 @@ const parishMap = {
   "Sandhurst Rail": "Sandhurst",
   "RMP Yorktown Road": "Sandhurst",
   "RMP Owlsmoor": "Sandhurst",
+  "RMP Birch Hill": "",
+  "RMP Crowthorne": "",
+  "RMP Gt Hollands": "",
 };
 // get unique values from parishMap
 const parishes = ['Bracknell Town', 'Binfield', 'Crowthorne', 'Sandhurst', 'Warfield', 'Winkfield'];
