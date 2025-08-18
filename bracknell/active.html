@@ -68,6 +68,28 @@ bracknell: true
         </div>
 
         <div class="chart-container" style="position: relative; height:500px;">
+          <canvas id="health_rewardChart"></canvas>
+          <canvas style="display: none" id="health_carbonSavingChart"></canvas>
+          <canvas style="display: none" id="health_milesChart"></canvas>
+        </div>
+        <p class="tableStartDate">Totals since 1st June 2021</p>
+        <div class="row mb-5">
+          <div class="col text-center">
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="chartToggle" value="#rewardChart" autocomplete="off" checked> Points
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="chartToggle" value="#carbonSavingChart" autocomplete="off"> Carbon Saving
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="chartToggle" value="#milesChart" autocomplete="off"> Green Miles
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="position: relative; height:500px;">
           <canvas id="rewardChart"></canvas>
           <canvas style="display: none" id="carbonSavingChart"></canvas>
           <canvas style="display: none" id="milesChart"></canvas>
@@ -175,28 +197,33 @@ bracknell: true
       });
     });
 
-    const schools = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
+    const orgs = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
     const date = getDefaultDate();
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
     const dateString = date.toISOString().split('T')[0];
 
-    setupTables(schools, url, date);
+    setupTables(orgs, url, date);
 
     $.get(url + "?from=" + dateString, orgData => {
-      setupGraphs(schools, orgData);
+      setupGraphs(orgs, orgData);
 
       const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + dateString;
       const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + dateString;
       const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + dateString;
-      const promises = [residentsUrl, gwrUrl, swrUrl].map(url => $.get(url).promise());
+      const healthUrl = 'https://api.ecorewards.co.uk/organisation/22/report?from=' + dateString;
+      const promises = [residentsUrl, gwrUrl, swrUrl, healthUrl].map(url => $.get(url).promise());
 
       Promise
         .all(promises)
-        .then(([bfResidentsData, gwrData, swrData]) => {
+        .then(([bfResidentsData, gwrData, swrData, healthData]) => {
           const responseData = bfResidentsData.data.concat(gwrData.data).concat(swrData.data).concat(orgData.data);
           const data = getParishData(responseData);
 
           setupGraphs(parishes, { data }, "parish_", createCumulativeGraph);
+
+          const healthGroups = healthData.data.reduce((acc, item) => ({  ...acc, [item.name]: item }), {});
+
+          setupGraphs(Object.keys(healthGroups), healthData, "health_", createCumulativeGraph);
         });
     });
   });
