@@ -3,18 +3,31 @@ title: Eco Rewards - Rewarding Green Travel Choices
 description: Earn reward points for making greener travel choices
 layout: default
 bracknell: true
+redirect_from: /ER4Businesses
 ---
 
 <div class="album py-5 bg-light">
   <div class="container">
     <div class="row justify-content-md-center">
-      <img width="20%" src="/assets/image/bracknell-bid-logo.svg" />
-    </div>
-
-    <div class="row justify-content-md-center mb-5">
-      <h2 class="heading heading--md heading--color-1 mt-5">Bracknell BID 5K Healthy Walk/Run Route</h2>
-      <p>Scan one of our QR codes on the route to record your walk/run through Eco Rewards.</p>
-      <img width="70%" height="70%" src="/assets/image/BracknellMap.png" />
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col text-center">
+            <h2 class="heading heading--md heading--color-1 mt-5">Bracknell Business</h2>
+            <p>Welcome to the home page for Bracknell Residents and Bracknell Business members.</p>
+            <p id="mobileApp"><a class="btn-primary btn" href="/mobile-app"><b>Download our mobile app to join</b></a></p>
+            <p>
+              <a href="https://play.google.com/store/apps/details?id=com.ecoreward" class="btn btn-primary">Go to Google Play</a>
+              <a href="https://apps.apple.com/in/app/eco-rewards/id1634208068" class="btn btn-primary">Go to App Store</a>
+            </p>
+            <p>For Bracknell Active go to <a href="/bracknell/active">Bracknell Active</a>.</p>
+            <p>For Bracknell Schools league tables and registration go to <a href="/bracknell/schools">schools</a>.</p>
+            <p>Discover our <a href="#offers">local offers and Access Rewards (discounts and cash-back benefits)</a>.</p>
+          </div>
+        </div>
+        <div class="img-container mb-4">
+          <img class="img-responsive m-auto" alt="Eco rewards for businesses" src="{{ site.baseurl }}/assets/image/ecorewards-for-business.png" />
+        </div>
+      </div>
     </div>
 
     <div class="row justify-content-md-center">
@@ -40,6 +53,7 @@ bracknell: true
           <canvas style="display: none" id="carbonSavingChart"></canvas>
           <canvas style="display: none" id="milesChart"></canvas>
         </div>
+        <p class="tableStartDate">Totals since 1st June 2021</p>
 
         <div class="row mt-5">
           <table class="table table-striped">
@@ -57,69 +71,6 @@ bracknell: true
           </table>
           <p class="tableStartDate">Totals since 1st June 2021</p>
         </div>
-
-        <div class="row justify-content-md-center mb-5">
-          <h2 id="register" class="heading heading--md heading--color-1 mt-5">Registration</h2>
-        </div>
-
-        <div class="card shadow-sm mt-3 text-left">
-          <div class="card-link" id="registerBid">
-            <div class="row card-body news-body">
-              <div class="col-sm-3">
-                <div class="post-image" style="background: url(/assets/image/post/green-travel-rewards-in-bracknell/reader.jpg) center no-repeat; background-size: 200px"></div>
-              </div>
-              <div class="col-sm-8 pt-3">
-                <h4 class="invert-header m-0 p-0">
-                  Bracknell BID Members
-                </h4>
-                <p class="mt-3 mb-3 mr-4">
-                  If you are a member of the Bracknell BID programme <a href="#register">register here</a> to get started.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card shadow-sm mt-3 text-left">
-          <div class="card-link" onclick="window.open('https://www.ecorewards.org.uk/secure/register.php')">
-            <div class="row card-body news-body">
-              <div class="col-sm-3">
-                <div class="post-image" style="background: url(/assets/image/tags.jpg) center no-repeat; background-size: 210px"></div>
-              </div>
-              <div class="col-sm-8 pt-3">
-                <h4 class="invert-header m-0 p-0">
-                  <span style="text-transform: lowercase">e+</span> OR SWR CARDHOLDER
-                </h4>
-                <p class="mt-3 mb-3 mr-4">
-                  If you have an e+ or SWR smart card, touch on a blue reader <b>FIRST</b> then <a target="_blank" href="https://www.ecorewards.org.uk/secure/register.php">register</a> to get started.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card shadow-sm mt-3 text-left">
-          <div class="card-link" onclick="window.open('https://www.ecorewards.org.uk/secure/register.php')">
-            <div class="row card-body news-body">
-              <div class="col-sm-3">
-                <div class="post-image" style="background: url(/assets/image/post/green-travel-rewards-in-bracknell/reader.jpg) center no-repeat; background-size: 200px"></div>
-              </div>
-              <div class="col-sm-8 pt-3">
-                <h4 class="invert-header m-0 p-0">
-                  RESIDENT WITH SMART TAG
-                </h4>
-                <p class="mt-3 mb-3 mr-4">
-                  If you have an Eco Rewards smart tag then <a target="_blank" href="https://www.ecorewards.org.uk/secure/register.php">register here</a> to get started.
-                </p>
-                <p class="mt-3 mb-3 mr-4">
-                  If you have smart tag then <a target="_blank" href="https://www.ecorewards.org.uk/secure/register.php">register</a> to get started. <br/>
-                  If you don’t have an e+ card or smart tag, <a href="{{ site.baseurl }}/contact">contact us</a>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
       <div class="col-md-8">
         <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
@@ -143,38 +94,13 @@ bracknell: true
 <script src="{{ site.baseurl }}/assets/js/script.js"></script>
 <script src="{{ site.baseurl }}/assets/js/graphs.js"></script>
 <script type="application/javascript">
-
-  $("#registerBid").click(() => {
-    const data = {
-      group: "/group/108",
-      defaultTransportMode: "walk",
-      defaultDistance: 3.1
-    };
-
-    $.ajax({
-      url: "https://api.ecorewards.co.uk/member",
-      type: "POST",
-      data: data,
-      success: response => {
-        console.log(response);
-        console.log(response.data.id.substr(response.data.id.lastIndexOf("/")));
-        window.open("https://www.ecorewards.org.uk/secure/register.php?memberId=" + response.data.id.substr(response.data.id.lastIndexOf("/") + 1));
-      },
-      error: () => {
-        alert('Invalid member ID');
-      }
-    });
-
-    return false;
-  });
-
-
   $(document).ready(() => {
-    const schools = ["Bracknell BID", "Bracknell Forest Residents", "SWR Customers"]
+    const schools = ["Bracknell BID", "Bracknell Forest Council", "SWR Customers", "GWR Customers"]
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
+    const fromDate = getDefaultDate();
 
-    $.get(url, response => setupGraphs(schools, response));
-    setupTables(schools, url);
+    $.get(`${url}?from=${fromDate.toISOString().split('T')[0]}`, response => setupGraphs(schools, response, undefined, createCumulativeGraph));
+    setupTables(schools, url, fromDate);
   });
 
 </script>

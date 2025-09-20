@@ -5,3 +5,5 @@ _site/
 .jekyll-metadata
 assets/.DS_Store
 assets/image/.DS_Store
+.bundle/
+vendor/
