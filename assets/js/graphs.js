@@ -135,9 +135,10 @@ function getDefaultDate() {
   return defaultDate;
 }
 
-function setupTables(organisations, url, fromDate = getDefaultDate()) {
+function setupTables(organisations, url, fromDate = getDefaultDate(), toDate = new Date()) {
+  const toDateString = toDate.toISOString().split('T')[0];
 
-  $.get(`${url}?from=${fromDate.toISOString().split('T')[0]}`, response => {
+  $.get(`${url}?from=${fromDate.toISOString().split('T')[0]}&to=${toDateString}`, response => {
     createTable(organisations, response);
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][fromDate.getMonth()];
     const nth = function(d) {

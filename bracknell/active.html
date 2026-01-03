@@ -166,6 +166,9 @@ bracknell: true
 <script type="application/javascript">
 
   $(document).ready(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromParam = urlParams.get('from');
+    const toParam = urlParams.get('to');
 
     $("#submit").on("click", () => {
       const memberId = $("#memberId").val();
@@ -198,19 +201,21 @@ bracknell: true
     });
 
     const orgs = ["SWR Customers", "Bracknell Forest Health", "Bracknell Forest Council"];
-    const date = getDefaultDate();
+    const date = fromParam ? new Date(fromParam) : getDefaultDate();
+    const toDate = toParam ? new Date(toParam) : new Date();
     const url = 'https://api.ecorewards.co.uk/scheme/6/report';
     const dateString = date.toISOString().split('T')[0];
+    const toDateString = toDate.toISOString().split('T')[0];
 
-    setupTables(orgs, url, date);
+    setupTables(orgs, url, date, toDate);
 
-    $.get(url + "?from=" + dateString, orgData => {
+    $.get(url + "?from=" + dateString + "&to=" + toDateString, orgData => {
       setupGraphs(orgs, orgData);
 
-      const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + dateString;
-      const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + dateString;
-      const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + dateString;
-      const healthUrl = 'https://api.ecorewards.co.uk/organisation/22/report?from=' + dateString;
+      const residentsUrl = 'https://api.ecorewards.co.uk/organisation/9/report?from=' + dateString + '&to=' + toDateString;
+      const gwrUrl = 'https://api.ecorewards.co.uk/organisation/42/report?from=' + dateString + '&to=' + toDateString;
+      const swrUrl = 'https://api.ecorewards.co.uk/organisation/5/report?from=' + dateString + '&to=' + toDateString;
+      const healthUrl = 'https://api.ecorewards.co.uk/organisation/22/report?from=' + dateString + '&to=' + toDateString;
       const promises = [residentsUrl, gwrUrl, swrUrl, healthUrl].map(url => $.get(url).promise());
 
       Promise
