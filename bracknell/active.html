@@ -138,6 +138,63 @@ bracknell: true
 
         </div>
 
+        <div class="form-group">
+          <label for="regName">Your name:</label>
+          <input type="text" class="form-control text-muted" id="regName"/>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Your email address:</label>
+          <input type="email" class="form-control text-muted" id="regEmail"/>
+        </div>
+
+        <div class="form-group">
+          <label for="regMode1">Main travel mode:</label>
+          <select class="form-control text-muted" id="regMode1" name="regMode1">
+            <option value="" selected>Select green transport mode</option>
+            <option value="car share">Car share</option>
+            <option value="electric car">Electric car</option>
+            <option value="taxi">Taxi</option>
+            <option value="park and ride">Park and ride</option>
+            <option value="tram">Tram</option>
+            <option value="bus">Bus</option>
+            <option value="train">Train</option>
+            <option value="cycling">Cycling</option>
+            <option value="walk">Walk</option>
+            <option value="wheeling">Wheeling</option>
+            <option value="work from home">Work from home</option>
+            <option value="jogging">Jogging</option>
+            <option value="running">Running</option>
+            <option value="rowing">Rowing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="regMode2">Second travel mode (optional):</label>
+          <select class="form-control text-muted" id="regMode2" name="regMode2">
+            <option value="" selected>Select green transport mode</option>
+            <option value="car share">Car share</option>
+            <option value="electric car">Electric car</option>
+            <option value="taxi">Taxi</option>
+            <option value="park and ride">Park and ride</option>
+            <option value="tram">Tram</option>
+            <option value="bus">Bus</option>
+            <option value="train">Train</option>
+            <option value="cycling">Cycling</option>
+            <option value="walk">Walk</option>
+            <option value="wheeling">Wheeling</option>
+            <option value="work from home">Work from home</option>
+            <option value="jogging">Jogging</option>
+            <option value="running">Running</option>
+            <option value="rowing">Rowing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="regDistance">Typical one-way distance (miles):</label>
+          <input type="number" step="0.1" min="0" class="form-control text-muted" id="regDistance"/>
+        </div>
+
         <button id="submit" type="button" class="btn btn-primary" disabled>Continue</button>
 
       </div>
@@ -173,17 +230,27 @@ bracknell: true
     $("#submit").on("click", () => {
       const memberId = $("#memberId").val();
       const orgId = $("#organisation").val();
+      const name = $("#regName").val();
+      const email = $("#regEmail").val();
+      const mode1 = $("#regMode1").val();
+      const mode2 = $("#regMode2").val();
+      const distance = parseFloat($("#regDistance").val());
 
       if (orgId === "/organisation/5" && !memberId.startsWith("633597")) {
         alert("SWR cards start with 633597");
         return;
       }
 
+      if (!name || !email || !mode1 || !(distance > 0)) {
+        alert("Please enter your name, email, main travel mode and distance");
+        return;
+      }
+
       const createAccount = memberId.length >= 16;
       const data = createAccount ? {
         group: $("#memberGroup").val(),
-        defaultTransportMode: "walk",
-        defaultDistance: 3.1,
+        defaultTransportMode: mode1,
+        defaultDistance: distance,
         smartcard: memberId
       } : {group: $("#memberGroup").val()};
       const url = createAccount ? "https://api.ecorewards.co.uk/member" : "https://api.ecorewards.co.uk/member/" + memberId;
@@ -192,7 +259,27 @@ bracknell: true
       $.ajax({
         url, type, data,
         success: () => {
-          window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + memberId;
+          // Email the registration details to Eco Rewards so they can be added to the
+          // Transmach (TM) database (replaces the old VacMedia registration hand-off).
+          $.ajax({
+            url: "https://formspree.io/f/xdaqplez",
+            method: "POST",
+            dataType: "json",
+            data: {
+              _subject: "New Eco Rewards registration",
+              memberId: memberId,
+              name: name,
+              _replyto: email,
+              organisation: $("#organisation option:selected").text(),
+              group: $("#memberGroup option:selected").text(),
+              travelMode1: mode1,
+              travelMode2: mode2,
+              defaultDistance: distance
+            },
+            complete: () => {
+              window.location = "/thank-you";
+            }
+          });
         },
         error: () => {
           alert('Invalid member ID');

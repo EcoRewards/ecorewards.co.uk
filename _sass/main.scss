@@ -202,16 +202,10 @@ a.btn-register, a.btn-register:hover, a.btn-register:visited, a.btn-register:act
 #vacWidget {
   a {
     display: block;
-    @media ($screen-desktop) {
-      display: none;
-    }
   }
 
-  iframe {
-    display: none;
-    @media ($screen-desktop) {
-      display: block;
-    }
+  img {
+    max-width: 100%;
   }
 }
 

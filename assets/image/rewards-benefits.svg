@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" width="800" height="260" role="img" aria-label="New Eco Rewards benefits coming soon">
+  <defs>
+    <style>
+      .h  { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 700; fill: #ffffff; }
+      .sub{ font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 400; fill: #eaffff; }
+      .eyebrow { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 700; fill: #ffffff; letter-spacing: 3px; }
+      .pill { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 700; fill: #ffffff; letter-spacing: 1px; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="800" height="260" rx="16" fill="#00999D"/>
+  <!-- depth shapes in lighter brand teal -->
+  <circle cx="726" cy="20" r="150" fill="#80cddd" opacity="0.35"/>
+  <circle cx="650" cy="250" r="96" fill="#80cddd" opacity="0.20"/>
+  <rect width="800" height="260" rx="16" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+
+  <!-- leaf motif -->
+  <g transform="translate(628 70)">
+    <path d="M20 96 C 20 40, 64 6, 120 6 C 120 62, 76 96, 20 96 Z" fill="#ffffff" opacity="0.92"/>
+    <path d="M28 88 C 60 66, 92 40, 116 14" fill="none" stroke="#00999D" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- text -->
+  <text class="eyebrow" x="56" y="70" font-size="20">ECO REWARDS</text>
+  <text class="h" x="54" y="128" font-size="46">New rewards &amp; benefits</text>
+  <text class="sub" x="56" y="166" font-size="22">A fresh scheme is on the way for our members.</text>
+
+  <!-- coming soon pill -->
+  <rect x="56" y="192" width="230" height="42" rx="21" fill="#FA7E27"/>
+  <text class="pill" x="171" y="219" font-size="19" text-anchor="middle">COMING SOON</text>
+
+  <text class="sub" x="300" y="219" font-size="16" opacity="0.9">Tap to find out more</text>
+</svg>
