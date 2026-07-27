@@ -139,7 +139,7 @@ bracknell: true
         </div>
 
         <div class="form-group">
-          <label for="regName">Your name:</label>
+          <label for="regName">Your name (first and last names):</label>
           <input type="text" class="form-control text-muted" id="regName"/>
         </div>
 
@@ -170,9 +170,12 @@ bracknell: true
         </div>
 
         <div class="form-group">
-          <label for="regMode2">Second travel mode (optional):</label>
+          <label for="regMode2">Previous mode:</label>
           <select class="form-control text-muted" id="regMode2" name="regMode2">
-            <option value="" selected>Select green transport mode</option>
+            <option value="" selected>Select previous transport mode</option>
+            <option value="small car">Small car</option>
+            <option value="medium car">Medium car</option>
+            <option value="large car">Large car</option>
             <option value="car share">Car share</option>
             <option value="electric car">Electric car</option>
             <option value="taxi">Taxi</option>
@@ -191,7 +194,7 @@ bracknell: true
         </div>
 
         <div class="form-group">
-          <label for="regDistance">Typical one-way distance (miles):</label>
+          <label for="regDistance">Default return journey distance (miles):</label>
           <input type="number" step="0.1" min="0" class="form-control text-muted" id="regDistance"/>
         </div>
 
@@ -247,12 +250,19 @@ bracknell: true
       }
 
       const createAccount = memberId.length >= 16;
-      const data = createAccount ? {
+      const data = {
         group: $("#memberGroup").val(),
         defaultTransportMode: mode1,
-        defaultDistance: distance,
-        smartcard: memberId
-      } : {group: $("#memberGroup").val()};
+        defaultDistance: distance
+      };
+      // Only send the previous mode when one was chosen, so we never overwrite an
+      // existing member's stored value with an empty string on the PATCH path.
+      if (mode2) {
+        data.previousTransportMode = mode2;
+      }
+      if (createAccount) {
+        data.smartcard = memberId;
+      }
       const url = createAccount ? "https://api.ecorewards.co.uk/member" : "https://api.ecorewards.co.uk/member/" + memberId;
       const type = createAccount ? "POST" : "PATCH";
 
@@ -269,7 +279,7 @@ bracknell: true
               _subject: "New Eco Rewards registration",
               memberId: memberId,
               name: name,
-              _replyto: email,
+              email: email,
               organisation: $("#organisation option:selected").text(),
               group: $("#memberGroup option:selected").text(),
               travelMode1: mode1,
