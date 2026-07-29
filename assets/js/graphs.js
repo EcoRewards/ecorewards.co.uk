@@ -20,6 +20,80 @@ function toggleButton() {
 $("#memberId").keypress(toggleButton);
 $("#memberGroup").change(toggleButton);
 
+// Wires up the tag-registration form (see _includes/registration-fields.html). Creates or
+// updates the member in the hub, then emails the captured details to Eco Rewards via Formspree
+// so they can be added to the Transmach (TM) database (replaces the old VacMedia hand-off).
+// options.validate(memberId, orgId) may return an error string to block submission (e.g. the
+// SWR card-prefix check on the Active form).
+function setupRegistration(options = {}) {
+  $("#submit").on("click", () => {
+    const memberId = $("#memberId").val();
+    const name = $("#regName").val();
+    const email = $("#regEmail").val();
+    const mode1 = $("#regMode1").val();
+    const mode2 = $("#regMode2").val();
+    const distance = parseFloat($("#regDistance").val());
+
+    if (typeof options.validate === "function") {
+      const error = options.validate(memberId, $("#organisation").val());
+      if (error) {
+        alert(error);
+        return;
+      }
+    }
+
+    if (!name || !email || !mode1 || !(distance > 0)) {
+      alert("Please enter your name, email, main travel mode and distance");
+      return;
+    }
+
+    const createAccount = memberId.length >= 16;
+    const data = {
+      group: $("#memberGroup").val(),
+      defaultTransportMode: mode1,
+      defaultDistance: distance
+    };
+    // Only send the previous mode when one was chosen, so we never overwrite an
+    // existing member's stored value with an empty string on the PATCH path.
+    if (mode2) {
+      data.previousTransportMode = mode2;
+    }
+    if (createAccount) {
+      data.smartcard = memberId;
+    }
+    const url = createAccount ? "https://api.ecorewards.co.uk/member" : "https://api.ecorewards.co.uk/member/" + memberId;
+    const type = createAccount ? "POST" : "PATCH";
+
+    $.ajax({
+      url, type, data,
+      success: () => {
+        $.ajax({
+          url: "https://formspree.io/f/xdaqplez",
+          method: "POST",
+          dataType: "json",
+          data: {
+            _subject: "New Eco Rewards registration",
+            memberId: memberId,
+            name: name,
+            email: email,
+            organisation: $("#organisation option:selected").text(),
+            group: $("#memberGroup option:selected").text(),
+            travelMode1: mode1,
+            travelMode2: mode2,
+            defaultDistance: distance
+          },
+          complete: () => {
+            window.location = "/thank-you";
+          }
+        });
+      },
+      error: () => {
+        alert('Invalid member ID');
+      }
+    });
+  });
+}
+
 function setupGraphs(organisations, apiResponse, prefixId = "", graphConstructor = createGraph) {
 
   $("input[name=" + prefixId + "chartToggle]").click(function() {
