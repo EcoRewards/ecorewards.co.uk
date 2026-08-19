@@ -58,7 +58,7 @@ mpTravel: true
         <h2 class="heading heading--md heading--color-1 mt-5">Links</h2>
         <p>
           <a class="btn-primary btn" style="color: white;" href="/mp-travel/selfreport">Self Reporting</a>
-          <a class="btn-primary btn" style="color: white;" href="https://www.ecorewards.org.uk/">Eco Rewards Website</a>
+          <a class="btn-primary btn" style="color: white;" target="_blank" href="https://ecorewards.benefithub.uk/">Eco Rewards Benefits</a>
         </p>
       </div>
     </div>
@@ -86,8 +86,8 @@ mpTravel: true
         url: "https://api.ecorewards.co.uk/member",
         type: "POST",
         data: data,
-        success: response => {
-          window.location = "https://www.ecorewards.org.uk/secure/register.php?memberId=" + response.data.id.substr(response.data.id.lastIndexOf("/") + 1);
+        success: () => {
+          window.location = "/thank-you";
         },
         error: () => {
           alert('Invalid member ID');
